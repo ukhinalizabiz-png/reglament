@@ -661,10 +661,10 @@ span.bear.ink { --bear-fg: #0e1611; --bear-bg: #cfdcc8; }
 @keyframes ring { 0% { transform: rotate(-3deg); } 50% { transform: rotate(3deg); } }
 
 /* склады */
-.boxes { position: relative; height: 150px; margin: 6px 0 4px; }
+.boxes { position: relative; height: 168px; margin: 6px 0 4px; }
 .boxes.locked { pointer-events: none; }
 .box { position: absolute; bottom: 0; width: 27%; max-width: 110px; height: 118px; transform: translateX(-50%); transition: left .32s var(--ease-io); }
-.boxes .box:nth-child(n+4) { width: 22%; }
+.boxes.four .box { width: 22%; }
 .bx-body {
   position: absolute; left: 0; right: 0; bottom: 0; height: 74%; z-index: 2;
   display: grid; place-items: center; text-align: center;
@@ -679,7 +679,10 @@ span.bear.ink { --bear-fg: #0e1611; --bear-bg: #cfdcc8; }
 .slip-in { display: block; width: 34px; height: 44px; background: var(--paper); box-shadow: 0 2px 6px rgba(0, 0, 0, .5); transform: rotate(-6deg); animation: rise .45s var(--ease-out); }
 .slip-in.big { width: 44px; height: 56px; }
 .bx-note { background: var(--paper); color: var(--ink); font-family: var(--f-mono); font-size: 11px; line-height: 1.15; padding: 5px 6px; text-align: center; transform: rotate(-4deg); animation: rise .45s var(--ease-out); box-shadow: 0 2px 6px rgba(0, 0, 0, .5); }
-.box-bear { width: 80%; animation: rise .5s var(--ease-out); }
+/* Медведь вылезает из коробки: стоит на её верхнем крае и виден целиком. */
+.box.bearbox .bx-in { bottom: 74%; height: auto; }
+.box-bear { width: 100%; animation: rise .5s var(--ease-out); filter: drop-shadow(0 3px 6px rgba(0, 0, 0, .55)); }
+.box:not(.open) .box-bear { opacity: 0; transition: opacity .2s; }
 .box.fourth .bx-body { background: linear-gradient(#8fa283, #6f8265); }
 .box.fourth { animation: slideIn .45s var(--ease-out); }
 .box.vanish { opacity: 0; transition: opacity .3s; }
@@ -818,12 +821,12 @@ span.bear.ink { --bear-fg: #0e1611; --bear-bg: #cfdcc8; }
 /* ---------- вход ---------- */
 .entrance { background: radial-gradient(ellipse 90% 60% at 50% 30%, #1b2b20, #0a110c 75%); }
 .corridor { position: relative; flex: 1; overflow: hidden; container-type: size; background: #0a110c; }
-.door-shot { position: absolute; left: 50%; top: 50%; width: max(100cqw, calc(100cqh * 9 / 16)); aspect-ratio: 9 / 16; transform: translate(-50%, -50%); transform-origin: 49% 50%; transition: transform 1.2s cubic-bezier(.55, 0, .75, .2); }
-.door-photo { display: block; width: 100%; height: 100%; }
-.door-shot::after { content: ""; position: absolute; inset: 0; background: radial-gradient(ellipse 70% 55% at 50% 50%, transparent 45%, rgba(4, 7, 5, .55)); pointer-events: none; }
-.door-glow { position: absolute; left: 40%; top: 28%; width: 18%; height: 44%; background: radial-gradient(ellipse at 50% 55%, #f0fff0, #9fd9a8 45%, transparent 75%); opacity: 0; transition: opacity .9s; mix-blend-mode: screen; }
-.note-mini { position: absolute; left: 41.5%; top: 44.5%; width: 5.5%; height: 4.5%; background: var(--paper); transform: rotate(-4deg); box-shadow: 0 1px 3px rgba(0, 0, 0, .6); }
-.reader { position: absolute; left: 66%; top: 44%; width: 12.5%; background: #1f2c23; border: 1px solid #3f5847; border-radius: 3px; padding: 1.2cqh .6cqw; display: flex; flex-direction: column; align-items: center; gap: .8cqh; transform: skewY(-8deg); box-shadow: 0 2px 6px rgba(0, 0, 0, .6); }
+.door-shot { position: absolute; left: 50%; top: 50%; width: 100cqw; aspect-ratio: 4 / 3; transform: translate(-50%, -50%); transform-origin: 50% 58%; transition: transform 1.2s cubic-bezier(.55, 0, .75, .2); box-shadow: 0 0 60px 20px rgba(4, 7, 5, .9); }
+.door-photo { display: block; width: 100%; height: 100%; object-fit: cover; }
+.door-shot::after { content: ""; position: absolute; inset: -2px; background: radial-gradient(ellipse 65% 60% at 50% 55%, transparent 40%, rgba(4, 7, 5, .7)); pointer-events: none; }
+.door-glow { position: absolute; left: 35%; top: 32%; width: 30%; height: 56%; background: radial-gradient(ellipse at 50% 55%, #f0fff0, #9fd9a8 45%, transparent 75%); opacity: 0; transition: opacity .9s; mix-blend-mode: screen; }
+.note-mini { position: absolute; left: 41%; top: 36%; width: 6%; height: 7.5%; background: var(--paper); transform: rotate(-4deg); box-shadow: 0 1px 3px rgba(0, 0, 0, .6); }
+.reader { position: absolute; left: 87%; top: 42%; width: 10%; background: #1f2c23; border: 1px solid #3f5847; border-radius: 3px; padding: 4px 2px; display: flex; flex-direction: column; align-items: center; gap: 4px; box-shadow: 0 2px 6px rgba(0, 0, 0, .6); }
 .led { width: 8px; height: 8px; border-radius: 50%; background: #3b4a3f; }
 .led.red { background: #ff5a44; box-shadow: 0 0 12px 3px rgba(255, 90, 68, .7); animation: flick .5s steps(1) 2; }
 .led.green { background: #7dff9a; box-shadow: 0 0 12px 3px rgba(125, 255, 154, .7); }

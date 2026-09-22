@@ -111,6 +111,7 @@ async function log(sc) {
         b4.classList.add('fourth');
         wrap.append(b4);
         order.push(b4);
+        wrap.classList.add('four');
         fourthShown = true;
         place(order);
         A.sfx('whoosh');
@@ -133,7 +134,8 @@ async function log(sc) {
       if (b.dataset.n === '4') {
         wrap.classList.add('locked');
         b.classList.add('open');
-        $('.bx-in', b).innerHTML = bear({ cls: 'box-bear', ink: true });
+        b.classList.add('bearbox');
+        $('.bx-in', b).innerHTML = bear({ cls: 'box-bear' });
         A.sfx('low');
         const bs = $('.box-bear', b);
         lookAt(bs, 2.5, -1);
@@ -147,6 +149,7 @@ async function log(sc) {
         await wait(350);
         b.remove();
         order = order.filter(x => x !== b);
+        wrap.classList.remove('four');
         place(order);
         wrap.classList.remove('locked');
         continue;
