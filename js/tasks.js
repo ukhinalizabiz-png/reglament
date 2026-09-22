@@ -178,10 +178,11 @@ async function prod(sc) {
   await say('asya', 'Юра, фабрика прислала образец новой доски. В письме пишут: „Я скопирую тебя, 100% как оригинал“.');
   await say('viktor', 'Я каждую позицию знаю наизусть, такой у нас нет. Найди, что они напутали, я отпишу китайцам.');
   const body = panel(sc, `<div class="boards">
-      <div class="bd-label">НАШ МАКЕТ</div>${board()}
-      <div class="bd-label">ОБРАЗЕЦ С ФАБРИКИ <span class="counter">отличий: <b>0</b> из 3</span></div>${board({ sample: true })}
-    </div><p class="task-hint">Нажимай на отличия на образце</p>`, { kind: 'crt', title: 'НАЙДИ ТРИ ОТЛИЧИЯ' });
-  const sample = $('.board.sample', body);
+      <div class="bd-col"><div class="bd-label">НАШ МАКЕТ</div>${board()}</div>
+      <div class="bd-col"><div class="bd-label">ОБРАЗЕЦ С ФАБРИКИ</div>${board({ sample: true })}</div>
+    </div>
+    <p class="task-hint">Нажимай на отличия на образце · нашёл: <span class="counter"><b>0</b> из 3</span></p>`, { kind: 'crt', title: 'НАЙДИ ТРИ ОТЛИЧИЯ' });
+  const sample = $('.bd.sample', body);
   const found = new Set();
   let lastMiss = 0;
   await until(done => sample.addEventListener('click', e => {
@@ -191,7 +192,7 @@ async function prod(sc) {
       if (found.has(k)) return;
       found.add(k);
       A.sfx('mark');
-      $$(`.mark-${k}`, sample).forEach(m => m.classList.add('on'));
+      hit.classList.add('found');
       $('.counter b', body).textContent = found.size;
       if (found.size === 3) done();
     } else {

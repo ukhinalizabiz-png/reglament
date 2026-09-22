@@ -144,26 +144,16 @@ export const FAX = `<svg class="fax" viewBox="0 0 120 84" aria-hidden="true">
 
 export const IRON = `<svg class="iron" viewBox="0 0 80 60" aria-hidden="true"><path d="M4 18 Q4 11 14 11 L62 11 Q76 12 77 18 L77 21 L4 21 Z"/><path class="legs" d="M22 21 L52 56 M54 21 L24 56"/></svg>`;
 
-// Доска для «найди отличия». sample: образец с фабрики с тремя ошибками.
+// Доска для «найди отличия»: настоящее фото TERRO, отличия нарисованы поверх.
+// sample: образец с фабрики, где «TERO», медведь улыбается и длина другая.
 export function board({ sample = false } = {}) {
-  const bind = (x) => `<g class="bind"><rect x="${x}" y="26" width="34" height="60" rx="10"/><rect class="strap" x="${x + 4}" y="42" width="26" height="6" rx="2"/><rect class="strap" x="${x + 4}" y="62" width="26" height="6" rx="2"/></g>`;
-  const marks = sample ? `
-    <ellipse class="mark mark-logo" cx="200" cy="57" rx="56" ry="22"/>
-    <ellipse class="mark mark-bear" cx="63" cy="56" rx="31" ry="33"/>
-    <ellipse class="mark mark-bind" cx="117" cy="56" rx="25" ry="38"/>
-    <ellipse class="mark mark-bind" cx="283" cy="56" rx="25" ry="38"/>
-    <rect class="hit" data-diff="logo" x="144" y="34" width="112" height="44"/>
-    <rect class="hit" data-diff="bear" x="30" y="22" width="66" height="68"/>
-    <rect class="hit" data-diff="bind" x="96" y="18" width="44" height="76"/>
-    <rect class="hit" data-diff="bind" x="260" y="18" width="44" height="76"/>` : '';
-  return `<svg class="board ${sample ? 'sample' : 'ref'}" viewBox="0 0 400 112" role="img" aria-label="${sample ? 'Образец с фабрики' : 'Наш макет'}">
-    <path class="deck" d="M24 56 C24 20 48 16 84 18 L316 18 C352 16 376 20 376 56 C376 92 352 96 316 94 L84 94 C48 96 24 92 24 56 Z"/>
-    <path class="deck-edge" d="M30 56 C30 25 52 22 84 24 L316 24 C348 22 370 25 370 56"/>
-    ${bind(100)}${bind(266)}
-    <text class="logo" x="200" y="68" text-anchor="middle">${sample ? 'TERO' : 'TERRO'}</text>
-    <svg class="bear mini ${sample ? 'smile' : ''}" x="34" y="26" width="58" height="60" viewBox="0 0 600 610" overflow="visible">${bearInner()}${sample ? '<g class="b-smile"><path class="b-cover" d="M238 348 L362 348 L364 520 Q364 594 300 596 Q236 594 236 520 Z"/><path class="b-smile-line" d="M250 418 Q300 486 350 418"/></g>' : ''}</svg>
-    ${marks}
-  </svg>`;
+  return `<div class="bd ${sample ? 'sample' : 'ref'}">
+    <img class="bd-img" src="assets/goods/board_mid.webp" alt="${sample ? 'Образец с фабрики' : 'Наш макет'}" draggable="false">
+    <span class="bd-el bd-logo" ${sample ? 'data-diff="logo"' : ''}>${sample ? 'TERO' : 'TERRO'}</span>
+    <span class="bd-el bd-bear" ${sample ? 'data-diff="bear"' : ''}>${bear({ cls: sample ? 'smile' : '' })}</span>
+    <span class="bd-el bd-num" ${sample ? 'data-diff="num"' : ''}>${sample ? '56' : '55'}</span>
+    ${sample ? '<i class="bd-hit"></i>' : ''}
+  </div>`;
 }
 
 export const MIC = `<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21M8.5 21h7" fill="none"/><path class="mic-slash" d="M4 4 L20 20" fill="none"/></svg>`;
