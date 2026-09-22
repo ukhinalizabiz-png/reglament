@@ -12,7 +12,7 @@ const { $, $$, h, sleep } = UI;
 const app = $('#app');
 let busy = false;
 const setBusy = v => { busy = v; app.classList.toggle('is-busy', v); if (!v) renderGuide(); };
-const bgUrl = id => `assets/office/${BG[id]}.webp`;
+const bgUrl = id => new URL(`assets/office/${BG[id]}.webp`, location.href).href;
 
 // ---------- часы 9:59: секундная стрелка доходит до конца и откатывается ----------
 let sec = 50, tenOClock = false;

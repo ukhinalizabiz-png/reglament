@@ -7,6 +7,8 @@ import { person, bear, lookAt, clock, FAX, TURNTABLE, monFace, SPEAKER } from '.
 
 const { say, wait, sleep, h, $, $$, panel, closePanel } = UI;
 
+const MEETING_BG = new URL('assets/office/meeting.webp', location.href).href;
+const STAIRS_BG = new URL('assets/office/stairs.webp', location.href).href;
 const topbar = (title, back = true) => `<header class="topbar">${back ? '<button class="back">‹ ОФИС</button>' : '<span class="tb-spacer"></span>'}<span class="scene-title">${title}</span><button class="snd" aria-label="Звук">${SPEAKER(A.isOn())}</button></header>`;
 
 function mount(el) {
@@ -138,7 +140,7 @@ export async function stairs(back) {
   const sc = mount(h(`<section class="screen scene stairs-scene">
     ${topbar('ЛЕСТНИЦА')}
     <div class="stairwell">
-      <div class="stair-bg" style="background-image:url(assets/office/stairs.webp)"></div>
+      <div class="stair-bg" style="background-image:url(${STAIRS_BG})"></div>
       <div class="floor-sign">ЭТАЖ <b>1</b></div>
       <div class="step-count">СТУПЕНЕК: <b>14</b></div>
       <div class="flight">${flight(14)}</div>
@@ -208,7 +210,7 @@ const CAKE_NO = [
 ];
 
 export async function meetingDoor(back) {
-  const sc = mount(h(`<section class="screen scene door-scene" style="--mbg:url(assets/office/meeting.webp)">
+  const sc = mount(h(`<section class="screen scene door-scene" style="--mbg:url(${MEETING_BG})">
     ${topbar('ПЕРЕГОВОРНАЯ')}
     <div class="mr-door">
       <span class="mr-plate">ПЕРЕГОВОРНАЯ</span>
@@ -262,7 +264,7 @@ export async function meetingDoor(back) {
 export async function finale(onAgain) {
   const office = Object.keys(PEOPLE).filter(id => id !== 'yura' && !PEOPLE[id].remote);
   const remote = Object.keys(PEOPLE).filter(id => PEOPLE[id].remote);
-  const sc = mount(h(`<section class="screen scene finale" style="--mbg:url(assets/office/meeting.webp)">
+  const sc = mount(h(`<section class="screen scene finale" style="--mbg:url(${MEETING_BG})">
     ${topbar('ПЕРЕГОВОРНАЯ', false)}
     <div class="mr">
       <i class="lamp l1"></i><i class="lamp l2"></i>
