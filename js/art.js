@@ -175,3 +175,45 @@ export const TURNTABLE = `<svg class="turntable" viewBox="0 0 160 90" aria-hidde
   <g transform="translate(70 52) scale(1 .54)"><g class="tt-spin"><circle class="tt-disc" r="48"/><circle class="tt-groove" r="38"/><circle class="tt-groove" r="28"/><circle class="tt-label" r="13"/><rect class="tt-shine" x="-2" y="-46" width="4" height="15" rx="2"/><circle class="tt-hole" r="2"/></g></g>
   <path class="tt-arm" d="M140 30 L132 58 L108 62"/><circle class="tt-pivot" cx="140" cy="30" r="5"/>
 </svg>`;
+
+// ---------- ребусы из песен: рисованные картинки вместо эмодзи ----------
+const GEAR = (cx, cy, r) => {
+  let teeth = '';
+  for (let i = 0; i < 8; i++) {
+    const a = i * Math.PI / 4;
+    teeth += `<rect x="${(cx + Math.cos(a) * r - 3.2).toFixed(1)}" y="${(cy + Math.sin(a) * r - 3.2).toFixed(1)}" width="6.4" height="6.4" transform="rotate(${i * 45} ${(cx + Math.cos(a) * r).toFixed(1)} ${(cy + Math.sin(a) * r).toFixed(1)})"/>`;
+  }
+  return `${teeth}<circle cx="${cx}" cy="${cy}" r="${r}" class="rb-o"/><circle cx="${cx}" cy="${cy}" r="${r * 0.38}" class="rb-o"/>`;
+};
+const MAN = (x, y, s = 1, run = false) => `<g transform="translate(${x} ${y}) scale(${s})">
+  <circle cx="0" cy="-26" r="7"/>
+  <rect x="-4" y="-18" width="8" height="20" rx="2"/>
+  ${run ? '<path class="rb-l" d="M-3 2 L-14 16 M3 2 L12 14 M-4 -12 L-16 -18 M4 -12 L16 -6"/>' : '<path class="rb-l" d="M-3 2 L-6 20 M3 2 L6 20 M-4 -12 L-12 -2 M4 -12 L12 -2"/>'}
+</g>`;
+const KEY = (x, y, w, label) => `<g transform="translate(${x} ${y})"><rect x="0" y="0" width="${w}" height="22" rx="3" class="rb-o"/><text x="${w / 2}" y="16" text-anchor="middle" class="rb-t">${label}</text></g>`;
+
+export const REBUS_ART = {
+  bike: `<svg class="rb" viewBox="0 0 120 80" aria-hidden="true">
+    ${GEAR(32, 46, 17)}${GEAR(74, 50, 12)}
+    <path class="rb-l" d="M32 29 L74 38 M32 63 L74 62" />
+    <g transform="translate(97 20)"><path d="M-9 14 Q-9 0 0 0 Q9 0 9 14 Z"/><rect x="-11" y="14" width="22" height="3.5" rx="1.5"/><circle cx="0" cy="21" r="3"/><rect x="-1.6" y="-5" width="3.2" height="5"/></g>
+  </svg>`,
+  simple: `<svg class="rb" viewBox="0 0 120 80" aria-hidden="true">
+    <text x="4" y="50" class="rb-big">2+2=4</text>
+    <path class="rb-check" d="M92 40 L100 50 L115 25"/>
+  </svg>`,
+  run: `<svg class="rb" viewBox="0 0 120 80" aria-hidden="true">
+    ${MAN(76, 58, 1.15, true)}
+    <g class="rb-dust"><circle cx="34" cy="50" r="11"/><circle cx="18" cy="56" r="8"/><circle cx="46" cy="60" r="7"/><circle cx="8" cy="62" r="5"/></g>
+    <path class="rb-l" d="M2 40 L26 40 M6 30 L22 30" />
+  </svg>`,
+  bandits: `<svg class="rb" viewBox="0 0 120 80" aria-hidden="true">
+    <g transform="translate(4 18)"><rect x="0" y="4" width="18" height="13" rx="4"/><rect x="24" y="4" width="18" height="13" rx="4"/><rect x="17" y="8" width="8" height="3.5"/></g>
+    <g transform="translate(52 24)"><path d="M6 12 Q2 40 18 40 Q34 40 30 12 Z"/><rect x="4" y="6" width="28" height="7" rx="2"/><text x="18" y="34" text-anchor="middle" class="rb-t inv">₽</text></g>
+    <g transform="translate(98 16)"><path d="M-10 16 Q-10 0 0 0 Q10 0 10 16 Z"/><rect x="-13" y="16" width="26" height="4" rx="2"/><path class="rb-l" d="M-16 -4 L-22 -10 M16 -4 L22 -10 M0 -8 L0 -16"/></g>
+  </svg>`,
+  copy: `<svg class="rb" viewBox="0 0 120 80" aria-hidden="true">
+    ${KEY(6, 6, 48, 'Ctrl+C')}${KEY(62, 6, 48, 'Ctrl+V')}
+    ${MAN(40, 74, 0.9)}${MAN(80, 74, 0.9)}
+  </svg>`,
+};

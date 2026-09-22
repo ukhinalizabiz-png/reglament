@@ -2,7 +2,7 @@
 import * as UI from './ui.js';
 import * as A from './audio.js';
 import * as FX from './fx.js';
-import { board, bear, lookAt, PHONE, IRON, MIC } from './art.js';
+import { board, bear, lookAt, REBUS_ART, PHONE, IRON, MIC } from './art.js';
 
 const { say, aside, wait, panel, closePanel, pickFrom, onceClick, until, h, $, $$, shuffle } = UI;
 const who = (sc, id) => $(`[data-person="${id}"]`, sc.el);
@@ -205,11 +205,11 @@ async function prod(sc) {
 }
 
 const REBUS = [
-  { pic: '⚙️⚙️<br>⛓️🔔', ok: 'Леван Горозия, «Велосипед»', no: ['Леван Горозия, «Самокат»', 'Леван Горозия, «Моноколесо»', 'Леван Горозия, «Электричка»'] },
-  { pic: '<span class="rb-txt">2 + 2 = 4</span> ✅', ok: 'Антоха МС, «Всё просто»', no: ['Антоха МС, «Всё сложно»', 'Антоха МС, «Созвон в 9:00»', 'Антоха МС, «Согласуем в понедельник»'] },
-  { pic: '🏃💨', ok: 'Kanye West, «Runaway»', no: ['Kanye West, «Walkaway»', 'Kanye West, «Deadline»', 'Kanye West, «Stay in Office»'] },
-  { pic: '🕶️💰🚨', ok: 'Леван Горозия, «Бандиты»', no: ['Леван Горозия, «Налоговая»', 'Леван Горозия, «Аудиторы»', 'Леван Горозия, «Бухгалтеры»'] },
-  { pic: '<span class="kbd">Ctrl+C</span><span class="kbd">Ctrl+V</span><br>🧍🧍', ok: 'Кассета, «Я скопирую тебя»', no: ['Кассета, «Я удалю тебя»', 'Кассета, «Я перешлю тебя»', 'Кассета, «Я отмечу тебя в сторис»'] },
+  { pic: REBUS_ART.bike, ok: 'Леван Горозия, «Велосипед»', no: ['Леван Горозия, «Самокат»', 'Леван Горозия, «Моноколесо»', 'Леван Горозия, «Электричка»'] },
+  { pic: REBUS_ART.simple, ok: 'Антоха МС, «Всё просто»', no: ['Антоха МС, «Всё сложно»', 'Антоха МС, «Созвон в 9:00»', 'Антоха МС, «Согласуем в понедельник»'] },
+  { pic: REBUS_ART.run, ok: 'Kanye West, «Runaway»', no: ['Kanye West, «Walkaway»', 'Kanye West, «Deadline»', 'Kanye West, «Stay in Office»'] },
+  { pic: REBUS_ART.bandits, ok: 'Леван Горозия, «Бандиты»', no: ['Леван Горозия, «Налоговая»', 'Леван Горозия, «Аудиторы»', 'Леван Горозия, «Бухгалтеры»'] },
+  { pic: REBUS_ART.copy, ok: 'Кассета, «Я скопирую тебя»', no: ['Кассета, «Я удалю тебя»', 'Кассета, «Я перешлю тебя»', 'Кассета, «Я отмечу тебя в сторис»'] },
 ];
 
 async function mkt(sc) {

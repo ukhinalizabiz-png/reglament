@@ -32,7 +32,7 @@ export async function entrance() {
       <img class="door-photo" src="assets/door.webp" alt="Дверь офиса ACTIONDIST" draggable="false">
       <i class="door-glow"></i>
       <i class="note-mini"></i>
-      <div class="reader"><i class="led"></i><div class="reader-screen">ПРИЛОЖИТЕ<br>ПРОПУСК</div></div>
+      <div class="reader"><i class="led"></i><div class="reader-screen">ПРИЛОЖИ<br>ПРОПУСК</div></div>
     </div></div>
     <div class="entrance-actions">
       <div class="note"><i class="tape-bit t1"></i><i class="tape-bit t2"></i><small>НА ДВЕРИ, НА СКОТЧЕ</small>Юра, в офисе для тебя кое-что лежит. Просто так не отдадим. Угадаешь, что это, тогда поговорим.</div>
@@ -59,7 +59,7 @@ export async function entrance() {
   await sleep(500);
   A.sfx('beep');
   led.className = 'led green';
-  scr.innerHTML = 'ЛАДНО,<br>ЗАХОДИ';
+  scr.innerHTML = 'ЗАХОДИ';
   await say('reader', 'Ладно, заходи.');
   A.sfx('door');
   el.classList.add('opening');
