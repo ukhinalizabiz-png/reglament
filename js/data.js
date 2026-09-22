@@ -28,7 +28,10 @@ export const PEOPLE = {
 // Лица. n: вырезанная голова в зелёной гамме, mouth: где рот (для жуткой улыбки в сцене сбоя).
 // У кого фото нет, голова закрыта мозаикой.
 export const FACES = {
+  asya: { n: 'assets/faces/asya.webp', mouth: [0.473, 0.589] },
   egor: { n: 'assets/faces/egor.webp', mouth: [0.461, 0.544] },
+  vika_s: { n: 'assets/faces/vika_s.webp', mouth: [0.529, 0.545] },
+  yulya: { n: 'assets/faces/yulya.webp', mouth: [0.613, 0.544] },
   ira: { n: 'assets/faces/ira.webp', mouth: [0.522, 0.547] },
   leonid: { n: 'assets/faces/leonid.webp', mouth: [0.457, 0.551] },
   liza: { n: 'assets/faces/liza.webp', mouth: [0.507, 0.544] },
