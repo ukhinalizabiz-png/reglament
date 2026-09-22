@@ -749,18 +749,18 @@ span.bear.ink { --bear-fg: #0e1611; --bear-bg: #cfdcc8; }
 .cap-tile {
   position: relative; aspect-ratio: 1; overflow: hidden;
   display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;
-  background: #c6d6bf; border-radius: 2px; transition: transform .15s;
+  background: #e6f6e2; border-radius: 2px; transition: transform .15s;
 }
 .cap-ic { font-size: 40px; line-height: 1; filter: grayscale(1) sepia(.4) hue-rotate(60deg) saturate(1.2); }
-.cap-ic.small { font-size: 26px; }
+.cap-ph { width: 96%; max-height: 78%; object-fit: contain; }
 .cap-tile .iron { width: 62%; }
 .iron path { fill: #3d5445; }
 .iron .legs { fill: none; stroke: #3d5445; stroke-width: 3; }
-.cap-t { font-family: var(--f-pixel); font-size: 11px; color: #33473a; min-height: 12px; }
+.cap-t { font-family: var(--f-pixel); font-size: 11px; color: #33473a; min-height: 12px; position: relative; z-index: 1; }
 .cap-tile.sel { transform: scale(.86); }
 .cap-check { position: absolute; left: 4px; top: 4px; width: 22px; height: 22px; border-radius: 50%; background: #2f6a43; color: #fff; font-style: normal; font-size: 14px; display: none; place-items: center; }
 .cap-tile.sel .cap-check { display: grid; }
-.cap-bear { position: absolute; inset: 0; display: grid; place-items: center; background: #c6d6bf; opacity: 0; transition: opacity .05s; pointer-events: none; }
+.cap-bear { position: absolute; inset: 0; display: grid; place-items: center; background: #e6f6e2; opacity: 0; transition: opacity .05s; pointer-events: none; }
 .cap-bear .bear { width: 80%; }
 .cap-tile.bear-on .cap-bear { opacity: 1; }
 .cap-foot { display: flex; align-items: center; justify-content: space-between; margin-top: 10px; }

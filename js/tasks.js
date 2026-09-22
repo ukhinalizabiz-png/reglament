@@ -299,15 +299,16 @@ async function haggle(sc) {
   return 'Его режут на всех.';
 }
 
+// ph: фото товара, ic: значок, пока фото нет
 const CAP = [
-  { id: 'terro', ic: '🏂', t: 'TERRO', ok: true },
-  { id: 'prime', ic: '🏂', t: 'PRIME', ok: true },
-  { id: 'lucky', ic: '🏂', t: 'LUCKYBOO', ok: true, small: true },
+  { id: 'terro', ph: 'assets/goods/board_dark.webp', t: 'TERRO', ok: true },
+  { id: 'prime', ph: 'assets/goods/board_color.webp', t: 'PRIME', ok: true },
+  { id: 'lucky', ph: 'assets/goods/lucky.webp', t: 'LUCKYBOO', ok: true },
   { id: 'pepper', ic: '🎿', t: 'PEPPER' },
   { id: 'sup', ic: '🏄', t: 'TERRO', line: 'Сап тоже наш, но по снегу на нём далеко не уедешь.' },
-  { id: 'poles', ic: '🦯', t: 'TERRO', line: 'Палки наши, но это не сноуборд. Хотя в походе пригодятся.' },
-  { id: 'mask', ic: '🥽', t: 'LOXLEY' },
-  { id: 'only', ic: '🔋', t: 'ONLY', line: 'Это ONLY. Катается только в багажнике.' },
+  { id: 'poles', ph: 'assets/goods/poles.webp', t: 'TERRO', line: 'Палки наши, но это не сноуборд. Хотя в походе пригодятся.' },
+  { id: 'mask', ph: 'assets/goods/loxley.webp', t: 'LOXLEY' },
+  { id: 'only', ph: 'assets/goods/only.webp', t: 'ONLY', line: 'Это ONLY. Катается только в багажнике.' },
   { id: 'iron', svg: IRON, t: '', line: 'Юра, это гладильная доска. Попробуй выключить и включить.' },
 ];
 
@@ -317,7 +318,7 @@ async function captcha(sc) {
   const body = panel(sc, `<div class="cap">
       <div class="cap-head"><small>Отметьте все</small><b>сноуборды</b></div>
       <div class="cap-grid">${items.map(it => `<button class="cap-tile" data-id="${it.id}">
-        ${it.svg || `<span class="cap-ic ${it.small ? 'small' : ''}">${it.ic}</span>`}<span class="cap-t">${it.t}</span>
+        ${it.ph ? `<img class="cap-ph" src="${it.ph}" alt="" draggable="false">` : it.svg || `<span class="cap-ic">${it.ic}</span>`}<span class="cap-t">${it.t}</span>
         <span class="cap-bear">${bear({ ink: true })}</span><i class="cap-check">✓</i></button>`).join('')}</div>
       <div class="cap-foot"><span class="cap-logo">IT-ОТДЕЛ · ЗАЩИТА</span><button class="btn" id="capOk">Подтвердить</button></div>
     </div>`, { kind: 'plain' });
