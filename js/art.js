@@ -3,13 +3,26 @@ import { PEOPLE, FACES, CAMS } from './data.js';
 
 export const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 
+// Костюм-бюст: покатые плечи, рукава по бокам, тень от подбородка на груди.
+// Голова-вырезка лежит слоем ниже, поэтому тень и воротник ложатся прямо на фото и связывают их.
 const SUIT = `
-<path class="suit" d="M14 200 L18 98 Q20 75 40 68 L50 78 L60 68 Q80 75 82 98 L86 200 Z"/>
-<path class="shirt" d="M41 67 L50 98 L59 67 L55 63 L45 63 Z"/>
-<path class="tie" d="M48 72 L52 72 L55 104 L50 113 L45 104 Z"/>
-<path class="lapel" d="M40 68 L47 100 M60 68 L53 100"/>
-<path class="arm" d="M24 112 L22 176 M76 112 L78 176"/>`;
-const NECK = `<rect class="neck" x="43" y="50" width="14" height="17" rx="4"/>`;
+<ellipse class="chin-shade" cx="50" cy="70.5" rx="15" ry="8.5" filter="url(#fSoft)"/>
+<path class="suit" d="M17.5 200 L15.5 150 Q12 104 14.5 90 Q18 79 30 75.5 L42 71 Q50 80 58 71 L70 75.5 Q82 79 85.5 90 Q88 104 84.5 150 L82.5 200 Z"/>
+<path class="sleeve" d="M17.5 200 L15.5 150 Q12 104 14.5 90 Q18 79 30 75.5 L33.5 80.5 Q24 87 22.5 104 Q21.8 145 23 200 Z"/>
+<path class="sleeve" d="M82.5 200 L84.5 150 Q88 104 85.5 90 Q82 79 70 75.5 L66.5 80.5 Q76 87 77.5 104 Q78.2 145 77 200 Z"/>
+<path class="chest-lit" d="M41 72 L31 76 Q25.5 79 25 98 Q31 90 43 92 Z"/>
+<path class="lit" d="M42 71 L30 75.5 Q18 79 14.5 90 L18 92 Q21.5 81.6 31.6 78 L43.4 73.6 Z"/>
+<path class="yoke" d="M31 76.5 Q50 85 69 76.5 L69 82 Q50 91.5 31 82 Z" filter="url(#fSoft2)"/>
+<path class="shirt" d="M44.2 67 L55.8 67 L56.6 78 L50 82.5 L43.4 78 Z"/>
+<path class="flap" d="M44.6 68.5 L50 82.5 L41.4 72.4 Z"/>
+<path class="flap" d="M55.4 68.5 L50 82.5 L58.6 72.4 Z"/>
+<ellipse class="chin-shade2" cx="50" cy="70.5" rx="8" ry="3.4" filter="url(#fSoft2)"/>
+<path class="knot" d="M46.9 75.6 L53.1 75.6 L54.6 82.4 L45.4 82.4 Z"/>
+<path class="tie" d="M46.1 82.4 L53.9 82.4 L55.6 104 L50 113 L44.4 104 Z"/>
+<path class="lapel" d="M42 71 L47.6 99.5 M58 71 L52.4 99.5"/>
+<path class="seam" d="M23.8 88 Q22.5 104 23 200 M76.2 88 Q77.5 104 77 200"/>
+<path class="hem" d="M17.5 200 L82.5 200 L82 172 Q50 182 18 172 Z"/>`;
+const NECK = `<rect class="neck" x="44.5" y="55" width="11" height="22" rx="5"/>`;
 
 // Нет фото: голова закрыта мозаикой, как у засекреченного свидетеля.
 const hash = s => { let x = 7; for (const c of s) x = (x * 31 + c.charCodeAt(0)) >>> 0; return () => ((x = (x * 1103515245 + 12345) >>> 0) / 4294967296); };
@@ -25,18 +38,28 @@ function mosaic(id) {
     const t = hair ? Math.floor(rnd() * 2) : 1 + Math.floor(rnd() * 4);
     out += `<rect x="${x.toFixed(1)}" y="${y.toFixed(1)}" width="${s + 0.2}" height="${s + 0.2}" fill="${MOSAIC_TONES[t]}"/>`;
   }
-  return `<g class="mosaic">${out}</g><g class="f-grin"><circle cx="43.5" cy="31.5" r="2.4"/><circle cx="56.5" cy="31.5" r="2.4"/><path d="M34 40 Q50 63 66 40 Z"/><path class="grin-teeth" d="M36.5 41.2 Q50 50 63.5 41.2 Z"/></g>`;
+  // Тот же масштаб и место, что у фото-головы: рисунок собран в старых координатах и сжат.
+  return `<g class="mos-fit" transform="translate(50 43.3) scale(.872) translate(-50 -34)">
+    <g class="mosaic">${out}</g>
+    <g class="f-grin"><circle cx="43.5" cy="31.5" r="2.4"/><circle cx="56.5" cy="31.5" r="2.4"/><path d="M34 40 Q50 63 66 40 Z"/><path class="grin-teeth" d="M36.5 41.2 Q50 50 63.5 41.2 Z"/></g>
+  </g>`;
 }
 
-const SNOW = `<g class="snow"><rect x="69" y="64" width="15" height="128" rx="7.5" transform="rotate(10 76 128)"/><rect class="snow-bind" x="70" y="100" width="13" height="8" rx="2" transform="rotate(10 76 128)"/><rect class="snow-bind" x="70" y="146" width="13" height="8" rx="2" transform="rotate(10 76 128)"/></g>`;
+const SNOW = `<g class="snow"><rect x="70" y="80" width="14" height="118" rx="7" transform="rotate(10 77 139)"/><rect class="snow-bind" x="71" y="112" width="12" height="7.5" rx="2" transform="rotate(10 77 139)"/><rect class="snow-bind" x="71" y="154" width="12" height="7.5" rx="2" transform="rotate(10 77 139)"/></g>`;
 
-// Голова-вырезка лежит под костюмом: воротник закрывает шею.
-// Кадр 300x365, ширина лица 43.5% кадра. На фигуре: left 11%, top -0.7%, width 78%, height 47.45%.
-const FACE_BOX = { left: 11, top: -0.7, w: 78, h: 47.45 };
+// Голова-вырезка лежит под костюмом: воротник и тень закрывают низ шеи, край вырезки растворён маской.
+// Кадр 300x365, ширина лица 43.5% кадра. На фигуре: left 16%, top 5.35%, width 68%, height 41.36%.
+const FACE_BOX = { left: 16, top: 5.35, w: 68, h: 41.36 };
 function grinOverlay(mouth) {
   const [mx, my] = mouth;
   const left = FACE_BOX.left + mx * FACE_BOX.w, top = FACE_BOX.top + my * FACE_BOX.h;
-  return `<svg class="grin-ov" viewBox="0 0 60 30" style="left:${(left - 21).toFixed(1)}%;top:${(top - 4.2).toFixed(1)}%" aria-hidden="true"><path d="M2 4 Q30 40 58 4 Q30 14 2 4 Z"/><path class="grin-teeth" d="M6 6.5 Q30 22 54 6.5 Q30 13 6 6.5 Z"/></svg>`;
+  return `<svg class="grin-ov" viewBox="0 0 60 30" style="left:${(left - 18).toFixed(1)}%;top:${(top - 3.6).toFixed(1)}%" aria-hidden="true"><path d="M2 4 Q30 40 58 4 Q30 14 2 4 Z"/><path class="grin-teeth" d="M6 6.5 Q30 22 54 6.5 Q30 13 6 6.5 Z"/></svg>`;
+}
+
+// У каждого свой наклон и рост, иначе ряд выглядит как копии одной фигуры.
+function pose(id) {
+  const rnd = hash(id + '#pose');
+  return `--tilt:${(rnd() * 3.2 - 1.6).toFixed(2)}deg;--sc:${(0.955 + rnd() * 0.09).toFixed(3)};--ht:${(rnd() * 3.6 - 1.8).toFixed(2)}deg`;
 }
 
 export function person(id, { cls = '', name = true, snow = false } = {}) {
@@ -46,14 +69,14 @@ export function person(id, { cls = '', name = true, snow = false } = {}) {
   const f = FACES[id];
   const badge = name ? `<span class="pname">${esc(p.name)}</span>` : '';
   if (f) {
-    return `<div class="person has-face ${cls}" data-person="${id}">
+    return `<div class="person has-face ${cls}" data-person="${id}" style="${pose(id)}">
       <img class="face" src="${f.n}" alt="" draggable="false">
       <svg class="fig" viewBox="0 0 100 200" aria-hidden="true">${SUIT}${snow ? SNOW : ''}</svg>
       ${grinOverlay(f.mouth)}${badge}
     </div>`;
   }
-  return `<div class="person no-face ${cls}" data-person="${id}">
-    <svg class="fig" viewBox="0 0 100 200" aria-hidden="true">${SUIT}${NECK}${mosaic(id)}${snow ? SNOW : ''}</svg>${badge}
+  return `<div class="person no-face ${cls}" data-person="${id}" style="${pose(id)}">
+    <svg class="fig" viewBox="0 0 100 200" aria-hidden="true">${NECK}${SUIT}${mosaic(id)}${snow ? SNOW : ''}</svg>${badge}
   </div>`;
 }
 

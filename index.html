@@ -35,6 +35,10 @@
   <div id="toast" role="status"></div>
   <div id="fx" aria-hidden="true"><canvas id="noise"></canvas><div class="scan"></div><div class="vignette"></div><div class="flash"></div></div>
 </div>
+<svg width="0" height="0" aria-hidden="true" style="position:absolute;left:-9999px" focusable="false">
+  <filter id="fSoft" x="-50%" y="-70%" width="200%" height="240%"><feGaussianBlur stdDeviation="3.4"/></filter>
+  <filter id="fSoft2" x="-50%" y="-70%" width="200%" height="240%"><feGaussianBlur stdDeviation="2.2"/></filter>
+</svg>
 <script type="module" src="js/main.js"></script>
 </body>
 </html>

@@ -19,7 +19,7 @@
   --crt: #c7e3c0;
   --crt-ink: #122016;
   --suit: #2e4437;
-  --shirt: #a3bea6;
+  --shirt: #93ab96;
   --skin: #7a957f;
   --tie: #0e1611;
 
@@ -480,19 +480,36 @@ input { font: inherit; }
 .person[data-person="yura"] .tie { fill: #cfe3c4; }
 
 /* ---------- люди ---------- */
-.person { position: relative; flex: none; aspect-ratio: 1 / 2; height: 100%; }
-.person .fig { position: relative; z-index: 1; display: block; width: 100%; height: 100%; overflow: visible; }
-.person.has-face .face { position: absolute; left: 11%; top: -0.7%; width: 78%; height: auto; z-index: 0; pointer-events: none; }
-.grin-ov { position: absolute; z-index: 2; width: 42%; height: auto; overflow: visible; display: none; }
+.person { position: relative; flex: none; aspect-ratio: 1 / 2; height: 100%; transform-origin: 50% 100%; transform: rotate(var(--tilt, 0deg)) scale(var(--sc, 1)); }
+.person .fig { position: relative; z-index: 1; display: block; width: 100%; height: 100%; overflow: visible; filter: drop-shadow(1.5px 3px 4px rgba(2, 5, 3, .5)); }
+.person.has-face .face {
+  position: absolute; left: 16%; top: 5.35%; width: 68%; height: auto; z-index: 0; pointer-events: none;
+  /* низ шеи растворяется, чтобы не было прямого среза вырезки */
+  -webkit-mask-image: linear-gradient(to bottom, #000 88%, rgba(0, 0, 0, .5) 96%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 88%, rgba(0, 0, 0, .5) 96%, transparent 100%);
+  filter: brightness(.96) contrast(1.04) drop-shadow(.8px 2px 3px rgba(4, 8, 5, .55));
+  transform-origin: 50% 88%; transform: rotate(var(--ht, 0deg));
+}
+.grin-ov { position: absolute; z-index: 2; width: 36%; height: auto; overflow: visible; display: none; }
 .grin-ov path { fill: #0b120d; }
 .grin-ov .grin-teeth { fill: #eef9ea; }
 .glitch-on .grin-ov { display: block; }
-.fig .suit { fill: var(--suit); stroke: #060b08; stroke-width: 1.6; }
+.fig .suit { fill: var(--suit); stroke: rgba(4, 8, 5, .65); stroke-width: 1.1; }
+.fig .sleeve { fill: rgba(4, 8, 5, .27); }
+.fig .lit { fill: rgba(207, 234, 208, .17); }
+.fig .chest-lit { fill: rgba(207, 234, 208, .07); }
+.fig .flap { fill: #78907c; }
+.fig .knot { fill: var(--tie); stroke: rgba(207, 234, 208, .22); stroke-width: .7; }
+.fig .chin-shade2 { fill: rgba(4, 8, 5, .3); }
+.fig .hem { fill: rgba(4, 8, 5, .16); }
+.fig .seam { stroke: rgba(4, 8, 5, .6); stroke-width: 1; fill: none; }
+.fig .chin-shade { fill: rgba(4, 8, 5, .5); }
+.fig .yoke { fill: rgba(4, 8, 5, .3); }
 .fig .shirt { fill: var(--shirt); }
 .fig .tie { fill: var(--tie); }
-.fig .lapel { stroke: #0b130e; stroke-width: 1.2; fill: none; }
+.fig .lapel { stroke: rgba(7, 14, 9, .7); stroke-width: 1.1; fill: none; }
 .fig .arm { stroke: #0f1812; stroke-width: 1.6; }
-.fig .neck, .fig .head { fill: var(--skin); stroke: #060b08; stroke-width: 1.2; }
+.fig .neck { fill: #63805f; stroke: rgba(4, 8, 5, .45); stroke-width: .8; }
 .fig .hair { fill: #18221b; }
 .fig .f-serious { fill: #16201a; }
 .fig .f-grin { display: none; fill: #0d1510; }
@@ -500,14 +517,14 @@ input { font: inherit; }
 .fig .snow rect:first-child { fill: #cfe3c4; stroke: #0b130e; stroke-width: 1.5; }
 .fig .snow-bind { fill: #16201a; }
 .pname {
-  position: absolute; left: 50%; top: 45%; transform: translateX(-50%); z-index: 1;
+  position: absolute; left: 50%; top: 46%; transform: translateX(-50%); z-index: 1;
   font-family: var(--f-pixel); font-size: clamp(9px, 2.8cqw, 12px); line-height: 1; white-space: nowrap;
   color: var(--ink); background: #dbe8d3; padding: 3px 5px 2px; border-radius: 2px;
   box-shadow: 0 1px 0 rgba(0, 0, 0, .5);
 }
 .person.talking { animation: talk .42s ease-in-out infinite alternate; }
 .person.talking .pname { background: var(--crt); box-shadow: 0 0 10px rgba(199, 227, 192, .7); }
-@keyframes talk { to { transform: translateY(-2.5%) rotate(-.6deg); } }
+@keyframes talk { to { transform: rotate(var(--tilt, 0deg)) scale(var(--sc, 1)) translateY(-2.5%) rotate(-.6deg); } }
 
 .remote { aspect-ratio: 1 / 1.4; }
 .mon {
