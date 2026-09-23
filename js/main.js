@@ -71,11 +71,11 @@ async function enter() {
   await reveal3d(1900);
   await G.regulation();
   setBusy(false);
-  // Первое знакомство с офисом: объясняем, как тут всё устроено.
+  // Первое знакомство с офисом: объясняем, как тут все устроено.
   if (!S.seen.hub) {
     S.seen.hub = true; save();
     await sleep(500);
-    UI.toast('Кто зовёт, у того задание. Порядок любой: нажми отдел на плане или кнопку «Другой отдел»', 5600);
+    UI.toast('Кто зовет, у того задание. Порядок любой: нажми отдел на плане или кнопку «Другой отдел»', 5600);
   }
 }
 
@@ -84,7 +84,7 @@ function welcomeBack() {
   if (t && t !== 'finale') setTimeout(() => UI.toast(`С возвращением. Тебя ждут: ${nameOf(t)}`, 3600), 500);
 }
 
-// ---------- кто сейчас зовёт ----------
+// ---------- кто сейчас зовет ----------
 // Первый несделанный отдел этажа, потом лестница или переговорная.
 function target() {
   if (!S.gift1) return ORDER[1].find(id => !S.done[id]) || 'stairs';
@@ -92,7 +92,7 @@ function target() {
   return 'finale';
 }
 // Как отдел называется в подсказках и на кнопке.
-const NICK = { buh: 'бухгалтерия', sales: 'отдел продаж', log: 'логистика', prod: 'продукт', mkt: 'маркетинг', design: 'дизайнеры', haggle: 'Серёжа', captcha: 'Влад', dossier: 'поддержка', call: 'удалёнка', stairs: 'лестница', meeting: 'переговорная', finale: 'переговорная' };
+const NICK = { buh: 'бухгалтерия', sales: 'отдел продаж', log: 'логистика', prod: 'продукт', mkt: 'маркетинг', design: 'дизайнеры', haggle: 'Сережа', captcha: 'Влад', dossier: 'поддержка', call: 'удаленка', stairs: 'лестница', meeting: 'переговорная', finale: 'переговорная' };
 const nameOf = t => NICK[t];
 const undoneHere = () => (S.gift1 ? ORDER[2] : ORDER[1]).filter(id => !S.done[id]);
 
@@ -114,10 +114,10 @@ function renderGuide() {
   // кнопка внизу
   const cta = $('#cta');
   const big = t === 'finale' ? 'ФИНАЛ' : NICK[t].toUpperCase();
-  const small = t === 'stairs' ? 'Все 6 подсказок у тебя. Угадай подарок' : t === 'meeting' ? 'Все подсказки у тебя. Угадай второй подарок' : t === 'finale' ? 'Посмотреть поздравление ещё раз' : 'Тебя зовут';
+  const small = t === 'stairs' ? 'Все 6 подсказок у тебя. Угадай подарок' : t === 'meeting' ? 'Все подсказки у тебя. Угадай второй подарок' : t === 'finale' ? 'Посмотреть поздравление еще раз' : 'Тебя зовут';
   $('#ctaGo', cta).innerHTML = `<span class="cta-txt"><small>${small}</small><b>${big}</b></span><span class="cta-go">›</span>`;
   cta.dataset.go = zid;
-  // кнопка выбора нужна, только если есть куда ещё пойти
+  // кнопка выбора нужна, только если есть куда еще пойти
   cta.classList.toggle('with-pick', undoneHere().some(id => id !== t && DEPTS[id]));
 }
 
@@ -177,7 +177,7 @@ function hubHTML() {
         <i class="lamp"></i><span class="plate">ЛЕСТНИЦА</span><span class="steps">${steps}</span>
         <span class="tape"><b>ПРОХОД ТОЛЬКО ДЛЯ УГАДАВШИХ</b></span>
       </div>
-      <div class="lock2"><b>ДОСТУП ЗАПРЕЩЁН</b><small>откроется после первого подарка</small></div>
+      <div class="lock2"><b>ДОСТУП ЗАПРЕЩЕН</b><small>откроется после первого подарка</small></div>
       <div class="yura-token" id="yura">${person('yura', { name: false, snow: true })}</div>
       <i class="ring" id="ring"></i>
       <span class="bubble" id="bubble"></span>
@@ -213,7 +213,7 @@ function renderHub() {
   const c1 = S.clues[1].length, c2 = S.clues[2].length;
   $('#status').textContent =
     !S.gift1 ? (c1 < NEED[1] ? `1 ЭТАЖ · ПОДСКАЗКИ ${c1} ИЗ ${NEED[1]}` : 'ИДИ К ЛЕСТНИЦЕ') :
-    !S.gift2 ? (c2 < NEED[2] ? `2 ЭТАЖ · ПОДСКАЗКИ ${c2} ИЗ ${NEED[2]}` : 'ИДИ В ПЕРЕГОВОРНУЮ') : 'ВСЁ СОГЛАСОВАНО';
+    !S.gift2 ? (c2 < NEED[2] ? `2 ЭТАЖ · ПОДСКАЗКИ ${c2} ИЗ ${NEED[2]}` : 'ИДИ В ПЕРЕГОВОРНУЮ') : 'ВСЕ СОГЛАСОВАНО';
   renderClues();
   renderGuide();
 }
@@ -237,7 +237,7 @@ $('#cluebar').addEventListener('click', () => {
     const got = S.clues[f];
     const items = got.map(c => `<div class="paper clue-mini"><small>${DEPTS[c.id].from}</small>${c.text}</div>`).join('');
     const left = NEED[f] - got.length;
-    return items + (left > 0 ? `<div class="clue-empty">Ещё не получено: ${left}</div>` : '');
+    return items + (left > 0 ? `<div class="clue-empty">Еще не получено: ${left}</div>` : '');
   };
   UI.sheet(`<h3 class="clues-h">1 ЭТАЖ · ПОДАРОК №1${S.gift1 ? ' · <em>УГАДАН</em>' : ''}</h3>${list(1)}
     ${S.gift1 ? `<h3 class="clues-h">2 ЭТАЖ · ПОДАРОК №2${S.gift2 ? ' · <em>УГАДАН</em>' : ''}</h3>${list(2)}` : ''}`, { btn: 'Закрыть', cls: 'clues-wrap' });
@@ -267,7 +267,7 @@ function placeYura(z, instant = false) {
   setTimeout(() => lookAt(wb, dx, dy), 250);
 }
 
-// Первый взгляд на офис: дом сначала виден объёмным макетом с двумя этажами,
+// Первый взгляд на офис: дом сначала виден объемным макетом с двумя этажами,
 // камера медленно обходит его и только потом раскладывает в плоский разрез.
 async function reveal3d(ms = 1900, from = 'wide') {
   const b = $('#building');
@@ -345,7 +345,7 @@ async function runDept(id) {
     UI.abortAll();
     await closeScene(sc.el);
     await zoomOut();
-    UI.toast('Задание подождёт. Вернёшься, начнёшь заново');
+    UI.toast('Задание подождет. Вернешься, начнешь заново');
     return;
   }
   const res = typeof out.r === 'string' ? { text: out.r } : out.r;
@@ -368,7 +368,7 @@ async function runDept(id) {
     await glitch();
   }
   if (n === NEED[d.floor]) {
-    UI.toast(d.floor === 1 ? 'Все подсказки первого этажа собраны. Теперь к лестнице' : 'Все подсказки второго этажа собраны. Теперь в переговорную', 3800);
+    UI.toast(d.floor === 1 ? 'Шесть подсказок у тебя. Иди к лестнице' : 'Четыре подсказки у тебя. Иди в переговорную', 3800);
     A.sfx('success');
   }
 }
@@ -407,7 +407,7 @@ function pickDept() {
   A.sfx('click');
   let taken = false;
   UI.sheet(`<div class="pick">
-      <b class="pick-h">Куда пойдёшь?</b>
+      <b class="pick-h">Куда пойдешь?</b>
       <div class="pick-list">${list.map(id => `<button class="pick-item${id === t ? ' now' : ''}" data-pick="${id}">
         <span class="pick-name">${NICK[id].toUpperCase()}${id === t ? '<i>зовут</i>' : ''}</span>
         <span class="pick-call">${CALLS[id]}</span>
@@ -459,7 +459,7 @@ async function go(id) {
     } else if (id === 'door') {
       UI.toast('Выход только после квеста. Регламент');
     } else if (id === 'stairs') {
-      if (S.gift1) { UI.toast('Лестница пройдена. Ты уже на втором этаже'); flash(target()); return; }
+      if (S.gift1) { UI.toast('Лестницу ты уже прошел, ты на втором этаже'); flash(target()); return; }
       const n = S.clues[1].length;
       if (n < NEED[1]) {
         UI.toast(`Проход только для угадавших. Сначала собери подсказки: ${n} из ${NEED[1]}`);

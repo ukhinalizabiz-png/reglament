@@ -47,7 +47,7 @@ function mosaic(id) {
 
 const SNOW = `<g class="snow"><rect x="70" y="80" width="14" height="118" rx="7" transform="rotate(10 77 139)"/><rect class="snow-bind" x="71" y="112" width="12" height="7.5" rx="2" transform="rotate(10 77 139)"/><rect class="snow-bind" x="71" y="154" width="12" height="7.5" rx="2" transform="rotate(10 77 139)"/></g>`;
 
-// Голова-вырезка лежит под костюмом: воротник и тень закрывают низ шеи, край вырезки растворён маской.
+// Голова-вырезка лежит под костюмом: воротник и тень закрывают низ шеи, край вырезки растворен маской.
 // Кадр 300x365, ширина лица 43.5% кадра. На фигуре: left 16%, top 5.35%, width 68%, height 41.36%.
 const FACE_BOX = { left: 16, top: 5.35, w: 68, h: 41.36 };
 function grinOverlay(mouth) {
@@ -80,7 +80,7 @@ export function person(id, { cls = '', name = true, snow = false } = {}) {
   </div>`;
 }
 
-// Экран удалёнщика: кадр с камеры или «камера выключена».
+// Экран удаленщика: кадр с камеры или «камера выключена».
 export function monFace(id) {
   const cam = CAMS[id];
   if (cam) return `<img class="mon-cam" src="${cam}" alt="" draggable="false">`;
@@ -91,7 +91,7 @@ export function monFace(id) {
 export function monitor(id, { cls = '', name = true } = {}) {
   const p = PEOPLE[id];
   return `<div class="person remote ${cls}" data-person="${id}">
-    <div class="mon"><div class="mon-screen">${monFace(id)}<i class="static"></i><b class="mon-msg">ВСЁ В ПОРЯДКЕ. ПРОДОЛЖАЙТЕ РАБОТАТЬ</b></div></div>
+    <div class="mon"><div class="mon-screen">${monFace(id)}<i class="static"></i><b class="mon-msg">ВСЕ В ПОРЯДКЕ. ПРОДОЛЖАЙТЕ РАБОТАТЬ</b></div></div>
     <svg class="chair" viewBox="0 0 100 60" aria-hidden="true"><rect class="seat" x="14" y="2" width="72" height="11" rx="4"/><path class="legs" d="M50 13 V42 M22 56 L50 44 L78 56"/></svg>
     ${name ? `<span class="pname">${esc(p.name)}</span>` : ''}
   </div>`;

@@ -14,7 +14,7 @@ async function buh(sc) {
   await say('vika_b', 'Только сначала проверь акт. Мы его в пятницу вечером составляли.');
   const rows = [
     ['Именинник', 'Юра', ''],
-    ['Должность', 'стажёр', 'err'],
+    ['Должность', 'стажер', 'err'],
     ['Основатель брендов', 'Терро и Прайм', ''],
     ['Вид спорта', 'горные лыжи', 'err'],
     ['Опыт на сноуборде', 'больше, чем у всего офиса вместе', ''],
@@ -22,7 +22,7 @@ async function buh(sc) {
     ['Просьба', 'сдавать чеки вовремя', 'cry'],
   ];
   const body = panel(sc, `<div class="act">
-      <div class="act-head">АКТ ПРИЁМКИ ИМЕНИННИКА<small>составлен в пятницу, 19:48</small></div>
+      <div class="act-head">АКТ ПРИЕМКИ ИМЕНИННИКА<small>составлен в пятницу, 19:48</small></div>
       <p class="task-hint">Найди три ошибки и нажми на них</p>
       <div class="act-rows">${rows.map((r, i) => `<button class="act-row" data-i="${i}"><span>${r[0]}:</span> <b>${r[1]}</b></button>`).join('')}</div>
       <div class="act-foot"><span>Ира, Вика</span><span class="counter">Найдено: <b>0</b> из 3</span></div>
@@ -39,9 +39,9 @@ async function buh(sc) {
       if (lastPay) aside('vika_b', 'Вот. Хоть кто-то заметил.');
       if (found === 3) done();
     } else if (kind === 'cry') {
-      FX.shake(b); A.sfx('nope'); aside('ira', 'Это не ошибка. Это крик души.');
+      FX.shake(b); A.sfx('nope'); aside('ira', 'Не ошибка. Крик души.');
     } else {
-      FX.shake(b); A.sfx('nope'); aside('ira', 'Тут всё сходится.');
+      FX.shake(b); A.sfx('nope'); aside('ira', 'Тут все сходится.');
     }
   }));
   await wait(lastPay ? 1300 : 600);
@@ -70,14 +70,14 @@ async function sales(sc) {
   A.sfx('tvOn');
   who(sc, 'andrey')?.classList.remove('off');
   await wait(400);
-  await say('andrey', 'Юра, с днём рождения из Сибири! У нас уже обед, так что поздравляю первым.');
+  await say('andrey', 'Юра, с днем рождения из Сибири! У нас уже обед, так что поздравляю первым.');
   await say('leonid', 'Андрей у нас всегда первый. Часовой пояс помогает.');
   await say('nastya', 'Ладно, сделку не закрыли, но подсказку отдадим бесплатно. Акция только сегодня.');
   return 'Оно крутится. Как мы в конце квартала.';
 }
 
 async function log(sc) {
-  await say('yulya', 'Юра, твоя посылка на одном из трёх складов.');
+  await say('yulya', 'Юра, твоя посылка на одном из трех складов.');
   await say('tanya', 'По документам она точно на складе. На каком, в документах не сказано.');
   const body = panel(sc, `<p class="task-hint" id="lh"></p><div class="boxes" id="boxes"></div>`, { kind: 'crt', title: 'ТРИ СКЛАДА' });
   const wrap = $('#boxes', body), hint = $('#lh', body);
@@ -184,7 +184,7 @@ async function prod(sc) {
       <div class="bd-col"><div class="bd-label">НАШ МАКЕТ</div>${board()}</div>
       <div class="bd-col"><div class="bd-label">ОБРАЗЕЦ С ФАБРИКИ</div>${board({ sample: true })}</div>
     </div>
-    <p class="task-hint">Нажимай на отличия на образце · нашёл: <span class="counter"><b>0</b> из 3</span></p>`, { kind: 'crt', title: 'НАЙДИ ТРИ ОТЛИЧИЯ' });
+    <p class="task-hint">Нажимай на отличия на образце · нашел: <span class="counter"><b>0</b> из 3</span></p>`, { kind: 'crt', title: 'НАЙДИ ТРИ ОТЛИЧИЯ' });
   const sample = $('.bd.sample', body);
   const found = new Set();
   let lastMiss = 0;
@@ -210,7 +210,7 @@ async function prod(sc) {
 
 const REBUS = [
   { pic: REBUS_ART.bike, ok: 'Леван Горозия, «Велосипед»', no: ['Леван Горозия, «Самокат»', 'Леван Горозия, «Моноколесо»', 'Леван Горозия, «Электричка»'] },
-  { pic: REBUS_ART.simple, ok: 'Антоха МС, «Всё просто»', no: ['Антоха МС, «Всё сложно»', 'Антоха МС, «Созвон в 9:00»', 'Антоха МС, «Согласуем в понедельник»'] },
+  { pic: REBUS_ART.simple, ok: 'Антоха МС, «Все просто»', no: ['Антоха МС, «Все сложно»', 'Антоха МС, «Созвон в 9:00»', 'Антоха МС, «Согласуем в понедельник»'] },
   { pic: REBUS_ART.run, ok: 'Kanye West, «Runaway»', no: ['Kanye West, «Walkaway»', 'Kanye West, «Deadline»', 'Kanye West, «Stay in Office»'] },
   { pic: REBUS_ART.bandits, ok: 'Леван Горозия, «Бандиты»', no: ['Леван Горозия, «Налоговая»', 'Леван Горозия, «Аудиторы»', 'Леван Горозия, «Бухгалтеры»'] },
   { pic: REBUS_ART.copy, ok: 'Кассета, «Я скопирую тебя»', no: ['Кассета, «Я удалю тебя»', 'Кассета, «Я перешлю тебя»', 'Кассета, «Я отмечу тебя в сторис»'] },
@@ -238,7 +238,7 @@ async function mkt(sc) {
     }
   }
   closePanel(sc);
-  return 'На нём твои любимые треки. И ещё немного нас.';
+  return 'На нем твои любимые треки. И еще немного нас.';
 }
 
 const WORDS = ['сделай', 'красиво', 'вчера', 'как у конкурентов', 'но лучше', 'чтобы вау', 'ну ты понял', 'бюджет обсудим'];
@@ -250,7 +250,7 @@ async function design(sc) {
   const body = panel(sc, `<div class="brief">
       <div class="brief-doc"><small>БРИФ ДЛЯ ДИЗАЙНЕРОВ</small><p id="bt">…</p></div>
       <div class="chips">${WORDS.map((w, i) => `<button class="chip" data-i="${i}">${w}</button>`).join('')}</div>
-      <p class="task-hint">Собери бриф хотя бы из трёх карточек</p>
+      <p class="task-hint">Собери бриф хотя бы из трех карточек</p>
       <button class="btn wide" id="send" disabled>Отправить</button>
     </div>`, { kind: 'crt' });
   const sel = [];
@@ -269,7 +269,7 @@ async function design(sc) {
   closePanel(sc);
   await wait(250);
   await say('sergey_d', 'Понял. Ничего не понял.');
-  await say('anara', 'Сделаю три варианта, выберешь четвёртый.');
+  await say('anara', 'Сделаю три варианта, выберешь четвертый.');
   return 'У него есть обложка. И шрифт на ней с нами никто не согласовал.';
 }
 
@@ -281,7 +281,7 @@ async function haggle(sc) {
     [500000, 'Ладно, 500 000. Как постоянному клиенту.'],
     [100000, '100 000, и это ниже себестоимости.'],
     [10000, '10 000. Влад, не смотри на меня так.'],
-    [0, 'Всё, забирай бесплатно. У тебя день рождения, у нас акция.'],
+    [0, 'Все, забирай бесплатно. У тебя день рождения, у нас акция.'],
   ];
   const fmt = n => n ? `${n.toLocaleString('ru-RU')} ₽` : 'БЕСПЛАТНО';
   const body = panel(sc, `<div class="price-tag"><small>ПОДСКАЗКА · 1 шт.</small><div class="old-prices"></div><div class="price" id="pr">${fmt(1000000)}</div></div>
@@ -309,7 +309,7 @@ const CAP = [
   { id: 'prime', ph: 'assets/goods/board_color.webp', t: 'PRIME', ok: true },
   { id: 'lucky', ph: 'assets/goods/lucky.webp', t: 'LUCKYBOO', ok: true },
   { id: 'pepper', ic: '🎿', t: 'PEPPER' },
-  { id: 'sup', ic: '🏄', t: 'TERRO', line: 'Сап тоже наш, но по снегу на нём далеко не уедешь.' },
+  { id: 'sup', ic: '🏄', t: 'TERRO', line: 'Сап тоже наш, но по снегу на нем далеко не уедешь.' },
   { id: 'poles', ph: 'assets/goods/poles.webp', t: 'TERRO', line: 'Палки наши, но это не сноуборд. Хотя в походе пригодятся.' },
   { id: 'mask', ph: 'assets/goods/loxley.webp', t: 'LOXLEY' },
   { id: 'only', ph: 'assets/goods/only.webp', t: 'ONLY', line: 'Это ONLY. Катается только в багажнике.' },
@@ -372,15 +372,15 @@ async function captcha(sc) {
   clearTimeout(timer);
   closePanel(sc);
   await UI.crt('ВЫ НЕ РОБОТ.<br>ВЫ ИМЕНИННИК', 1400);
-  return 'На нём будут свечи. Сколько, не скажем, это конфиденциальные данные.';
+  return 'На нем будут свечи. Сколько, не скажем, это конфиденциальные данные.';
 }
 
 const QUIZ = [
   { q: 'Что из этого выпускает Терро?', ok: 'Треккинговые палки', no: ['Горные лыжи', 'Детские комбинезоны', 'Солнечные панели'], who: 'masha_m', why: 'Лыжи делает PEPPER, комбинезоны LUCKYBOO, панели ONLY. А Терро ходит с палками.' },
   { q: 'Какой бренд делает маски с линзами Carl Zeiss?', ok: 'LOXLEY', no: ['SKIFREE', 'TERRO', 'PRIME'], who: 'masha_m', why: 'LOXLEY. Маски есть и у других, но Carl Zeiss только в премиуме.' },
-  { q: 'Символ с какого альбома «Кино» спрятан на доске TERRO X КИНО?', ok: '«Группа крови»', no: ['«Звезда по имени Солнце»', '«Чёрный альбом»', '«Последний герой»'], who: 'masha_m', why: '«Группа крови». Матовый топшит, а под ним глянцевый символ с обложки. Свои доски надо знать.' },
+  { q: 'Символ с какого альбома «Кино» спрятан на доске TERRO X КИНО?', ok: '«Группа крови»', no: ['«Звезда по имени Солнце»', '«Черный альбом»', '«Последний герой»'], who: 'masha_m', why: '«Группа крови». Матовый топшит, а под ним глянцевый символ с обложки. Свои доски надо знать.' },
   { q: 'Сколько у нас складов?', ok: '3', no: ['1', '2', '4'], who: 'yulya', why: 'Три! И я отвечаю за все три, пожалей меня.' },
-  { q: 'Кто в бухгалтерии ведёт оплаты от отдела продаж?', ok: 'Вика', no: ['Ира', 'Таня', 'Леонид'], who: 'vika_b', why: 'Это я. И оплаты всё ещё приходят не вовремя.' },
+  { q: 'Кто в бухгалтерии ведет оплаты от отдела продаж?', ok: 'Вика', no: ['Ира', 'Таня', 'Леонид'], who: 'vika_b', why: 'Это я. И оплаты все еще приходят не вовремя.' },
   { q: 'Сколько в компании айтишников?', ok: '1', no: ['2', '3', '5'], who: 'vlad', why: 'Один. И это я проверял тебя капчей.' },
 ];
 
@@ -439,25 +439,25 @@ async function dossier(sc) {
   if (+s.dataset.n < 5) setTimeout(() => UI.toast('Оценка ниже пяти не предусмотрена регламентом'), 600);
   await wait(1100);
   closePanel(sc);
-  return 'Оно сладкое. И слоёв в нём больше, чем в нашей системе скидок.';
+  return 'Оно сладкое. И слоев в нем больше, чем в нашей системе скидок.';
 }
 
 const CALL_BTNS = [
   ['✋', 'Поднять руку', 'Рука поднята. Никто не заметил'],
-  ['▦', 'Размыть фон', 'Фон размыт. Бардак всё равно видно'],
+  ['▦', 'Размыть фон', 'Фон размыт. Бардак все равно видно'],
   ['▭', 'Экран', 'Демонстрация экрана: показывать нечего'],
   ['☺', 'Реакции', 'Реакция отправлена'],
   ['✉', 'Чат', 'Ната: Алло?'],
   ['CC', 'Субтитры', 'Субтитры и так включены'],
   ['👥', 'Участники', 'Участники: 21 и медведь'],
-  ['●', 'Запись', 'Запись ведёт бухгалтерия'],
+  ['●', 'Запись', 'Запись ведет бухгалтерия'],
 ];
 
 async function call(sc) {
   await say('katya', 'Юра, ты на мьюте!');
   await say('masha_s', 'Здравствуйте, техподдержка. У вас выключен микрофон, найдите значок в углу экрана.');
   const body = panel(sc, `<div class="call">
-      <div class="call-top"><span>Планёрка</span><span>09:59</span></div>
+      <div class="call-top"><span>Планерка</span><span>09:59</span></div>
       <div class="call-tiles"><div class="ct">Маша</div><div class="ct">Катя</div><div class="ct you" id="you">Юра (вы) <em>микрофон выкл.</em></div></div>
       <div class="call-bar">${CALL_BTNS.map((b, i) => `<button class="cb" data-i="${i}"><span>${b[0]}</span><small>${b[1]}</small></button>`).join('')}
         <button class="cb leave" data-leave="1"><span>✕</span><small>Выйти</small></button></div>
@@ -477,7 +477,7 @@ async function call(sc) {
       leaving = true;
       callEl.classList.add('left');
       A.sfx('deny');
-      try { await say('katya', 'Юра, ты вышел. Заходи обратно, мы всё видели.'); } catch {}
+      try { await say('katya', 'Юра, ты вышел. Заходи обратно, мы все видели.'); } catch {}
       callEl.classList.remove('left');
       leaving = false;
     } else {
@@ -497,7 +497,7 @@ async function call(sc) {
   A.sfx('success');
   await wait(600);
   closePanel(sc);
-  return { text: 'Сейчас оно стоит в холодильнике на кухне.', after: [['masha_s', 'А нам всё равно не достанется. Сфоткайте хоть.']] };
+  return { text: 'Сейчас оно стоит в холодильнике на кухне.', after: [['masha_s', 'А нам все равно не достанется. Сфоткайте хоть.']] };
 }
 
 export const TASKS = { buh, sales, log, prod, mkt, design, haggle, captcha, dossier, call };

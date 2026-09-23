@@ -6,12 +6,12 @@ import * as A from './audio.js';
 export const $ = (s, r = document) => r.querySelector(s);
 export const $$ = (s, r = document) => [...r.querySelectorAll(s)];
 export const h = (html) => { const t = document.createElement('template'); t.innerHTML = html.trim(); return t.content.firstElementChild; };
-// ?fast в адресе ускоряет всё в 10 раз, для проверки.
+// ?fast в адресе ускоряет все в 10 раз, для проверки.
 export const FAST = new URLSearchParams(location.search).has('fast');
 export const sleep = ms => new Promise(r => setTimeout(r, FAST ? ms / 10 : ms));
 export const shuffle = arr => { const a = [...arr]; for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
 
-// Уход из сцены посреди задания: всё, что ещё ждёт, тихо обрывается.
+// Уход из сцены посреди задания: все, что еще ждет, тихо обрывается.
 export const ABORT = Symbol('abort');
 let token = 0;
 let cleanups = [];
@@ -22,7 +22,7 @@ export function cleanup(fn) { cleanups.push(fn); }
 export function runCleanups() { const c = cleanups; cleanups = []; c.forEach(fn => { try { fn(); } catch {} }); }
 export function abortAll() { token++; clearSubs(); runCleanups(); }
 
-// Ждём клик по элементу, подходящему под selector внутри root.
+// Ждем клик по элементу, подходящему под selector внутри root.
 export function pickFrom(root, sel) {
   const t = token;
   return new Promise(res => {
@@ -80,7 +80,7 @@ let sayId = 0;
 export function clearSubs() { sayId++; const s = $('#subs'); s.className = ''; s.innerHTML = ''; $$('#screens .speaking').forEach(e => e.classList.remove('speaking')); }
 
 // block: окно ловит нажатия. Первое нажатие допечатывает реплику, второе листает дальше.
-// Без нажатий реплика сама уходит, когда её успели бы прочитать.
+// Без нажатий реплика сама уходит, когда ее успели бы прочитать.
 export async function say(who, text, { block = true, big = false } = {}) {
   const t = token, id = ++sayId;
   const subs = $('#subs');

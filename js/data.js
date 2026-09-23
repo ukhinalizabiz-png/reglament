@@ -16,7 +16,7 @@ export const PEOPLE = {
   nata:     { name: 'Ната',   role: 'инфлюенс-менеджер · на мониторе', remote: true },
   sergey_d: { name: 'Сергей', role: 'руководитель дизайна · на мониторе', remote: true },
   anara:    { name: 'Анара',  role: 'дизайнер · на мониторе', remote: true },
-  seryozha: { name: 'Серёжа', role: 'коммерческий директор' },
+  seryozha: { name: 'Сережа', role: 'коммерческий директор' },
   vlad:     { name: 'Влад',   role: 'единственный айтишник' },
   masha_m:  { name: 'Маша',   role: 'маркетинг коммерции' },
   vika_s:   { name: 'Вика',   role: 'поддержка клиентов' },
@@ -25,7 +25,7 @@ export const PEOPLE = {
   yura:     { name: 'Юра',    role: 'именинник' },
 };
 
-// Лица. n: вырезанная голова в зелёной гамме, mouth: где рот (для жуткой улыбки в сцене сбоя).
+// Лица. n: вырезанная голова в зеленой гамме, mouth: где рот (для жуткой улыбки в сцене сбоя).
 // У кого фото нет, голова закрыта мозаикой.
 export const FACES = {
   asya: { n: 'assets/faces/asya.webp', mouth: [0.473, 0.589] },
@@ -44,7 +44,7 @@ export const FACES = {
   yura: { n: 'assets/faces/yura.webp', mouth: [0.513, 0.55] },
 };
 
-// Кадры «с камеры» для мониторов удалёнщиков и пропуска Юры. Нет кадра: «камера выключена».
+// Кадры «с камеры» для мониторов удаленщиков и пропуска Юры. Нет кадра: «камера выключена».
 export const CAMS = {
   andrey: 'assets/faces/andrey-cam.webp',
   anara: 'assets/faces/anara-cam.webp',
@@ -64,10 +64,10 @@ export const DEPTS = {
   prod:    { floor: 1, sign: 'ПРОДУКТ',      from: 'ПРОДУКТ',       cast: ['viktor', 'asya'] },
   mkt:     { floor: 1, sign: 'МАРКЕТИНГ',    from: 'МАРКЕТИНГ',     cast: ['liza', 'yana', 'nata'] },
   design:  { floor: 1, sign: 'ДИЗАЙН',       from: 'ДИЗАЙН',        cast: ['sergey_d', 'anara'] },
-  haggle:  { floor: 2, sign: 'КОММ. ДИРЕКТОР', from: 'СЕРЁЖА',      cast: ['seryozha'] },
+  haggle:  { floor: 2, sign: 'КОММ. ДИРЕКТОР', from: 'СЕРЕЖА',      cast: ['seryozha'] },
   captcha: { floor: 2, sign: 'IT',           from: 'IT-ОТДЕЛ',      cast: ['vlad'] },
   dossier: { floor: 2, sign: 'МАРКЕТИНГ И ПОДДЕРЖКА', short: 'ПОДДЕРЖКА', from: 'ПОДДЕРЖКА', cast: ['masha_m', 'vika_s'] },
-  call:    { floor: 2, sign: 'УДАЛЁНКА',     from: 'КАТЯ',          cast: ['masha_s', 'katya'] },
+  call:    { floor: 2, sign: 'УДАЛЕНКА',     from: 'КАТЯ',          cast: ['masha_s', 'katya'] },
 };
 
 export const NEED = { 1: 6, 2: 4 };
@@ -112,7 +112,7 @@ export const CALLS = {
   buh: 'Налоговая просила передать: тебе…',
   sales: 'Юра, к нам едут вышибалы!',
   log: 'Китайцы прислали не тот стафф',
-  prod: 'Пришёл образец с фабрики!',
+  prod: 'Пришел образец с фабрики!',
   mkt: 'Давай создадим аккаунт на Онлифанс',
   design: 'Хорошо, что объяснил. Плохо, что мы не поняли',
   haggle: 'Есть подсказка. Недорого',
@@ -123,7 +123,7 @@ export const CALLS = {
   meeting: 'Переговорная свободна',
 };
 
-// Фоны из фото офиса (зелёная гамма).
+// Фоны из фото офиса (зеленая гамма).
 export const BG = {
   buh: 'buh', sales: 'sales', log: 'log', prod: 'prod', mkt: 'mkt', design: 'design',
   haggle: 'haggle', captcha: 'captcha', dossier: 'dossier', call: 'call',

@@ -53,9 +53,9 @@ export async function entrance() {
   await sleep(500);
   A.sfx('deny');
   led.className = 'led red';
-  scr.innerHTML = 'ДОСТУП<br>ЗАПРЕЩЁН';
+  scr.innerHTML = 'ДОСТУП<br>ЗАПРЕЩЕН';
   pass.classList.remove('show', 'scan');
-  await say('reader', 'Доступ запрещён. Именинников пускаем только через квест.');
+  await say('reader', 'Доступ запрещен. Именинников пускаем только через квест.');
   await sleep(500);
   A.sfx('beep');
   led.className = 'led green';
@@ -72,7 +72,7 @@ export async function regulation() {
   await UI.sheet(`<div class="reg-wall">${bear({ cls: 'wall' })}${clock('reg-clock')}</div>
     <div class="paper reg">
       <h3>РЕГЛАМЕНТ ПРОХОЖДЕНИЯ КВЕСТА</h3>
-      <p>Нажимай на коллег. Каждый отдел даст задание, за верный ответ получишь подсказку. Соберёшь все и поймёшь, что тебя ждёт.</p>
+      <p>Нажимай на коллег. Каждый отдел даст задание, за верный ответ получишь подсказку. Соберешь все и поймешь, что тебя ждет.</p>
       <p class="reg-sign">Согласовано всеми отделами.</p>
       <div class="stamp hit">ПЕЧАТЬ<br>БУХГАЛТЕРИИ</div>
     </div>
@@ -152,7 +152,7 @@ export async function stairs(back) {
   $('.back', sc.el).addEventListener('click', () => { A.sfx('click'); back(); });
   const el = sc.el, gb = $('.guard .bear', el);
   lookAt(gb, 0, 1);
-  const { form, input } = guessForm(sc, 'Ну что, Юра, что тебя ждёт?');
+  const { form, input } = guessForm(sc, 'Ну что, Юра, что тебя ждет?');
   let wrong = 0;
   try {
     for (;;) {
@@ -177,7 +177,7 @@ export async function stairs(back) {
     $('#tape', el).classList.add('fall');
     $('.guard', el).classList.add('aside');
     await wait(700);
-    // Подъём: ступенек становится больше.
+    // Подъем: ступенек становится больше.
     const fl = $('.flight', el), cnt = $('.step-count b', el), fs = $('.floor-sign b', el);
     el.classList.add('climbing');
     await wait(600);
@@ -192,7 +192,7 @@ export async function stairs(back) {
     $('.fax', el).classList.add('printing');
     A.sfx('fax');
     await wait(1700);
-    await UI.sheet(`<div class="paper fax-paper"><div class="fax-head">ФАКС · ВХОДЯЩИЙ · 2009</div><p>Юра, это ты из 2009 года. Всё получится.</p><p>P.S. Назови бренд покороче. Например, Терро.</p></div>`, { btn: 'Подняться на второй этаж', cls: 'fax-wrap' });
+    await UI.sheet(`<div class="paper fax-paper"><div class="fax-head">ФАКС · ВХОДЯЩИЙ · 2009</div><p>Юра, это ты из 2009 года. Все получится.</p><p>P.S. Назови бренд покороче. Например, Терро.</p></div>`, { btn: 'Подняться на второй этаж', cls: 'fax-wrap' });
     await unmount(sc);
     return true;
   } catch (e) {
@@ -206,7 +206,7 @@ const CAKE_OK = ['торт', 'тортик', 'торты', 'тортики'];
 const CAKE_NO = [
   [['пирог', 'пирожок'], 'Близко. Но нет.'],
   [['пицца', 'пиццу'], 'Опять пицца? Сказали же, по пятницам.'],
-  [['пирожные', 'пирожное', 'печенье', 'печенька', 'печеньки'], 'Бери выше. Слоёв на пять.'],
+  [['пирожные', 'пирожное', 'печенье', 'печенька', 'печеньки'], 'Бери выше. Слоев на пять.'],
 ];
 
 export async function meetingDoor(back) {
@@ -219,13 +219,13 @@ export async function meetingDoor(back) {
         <div class="card-name"><span class="redact">████████</span><em class="card-hint"></em></div>
         <div class="card-rating">★★★☆☆ <b>3,0</b> · 2 отзыва</div>
         <dl class="card-specs">
-          <dt>Вес</dt><dd>хватит на весь офис, кроме удалёнки</dd>
+          <dt>Вес</dt><dd>хватит на весь офис, кроме удаленки</dd>
           <dt>Срок годности</dt><dd>до конца рабочего дня</dd>
           <dt>Комплектация</dt><dd>свечи и надпись, нож не входит. Шрифт надписи с дизайнерами не согласован</dd>
         </dl>
         <div class="card-reviews">
-          <div class="rv"><b>Серёжа</b><span>★★★★★</span><p>Взял бы ещё</p></div>
-          <div class="rv"><b>Катя</b><span>★☆☆☆☆</span><p>До удалёнки не доехало</p></div>
+          <div class="rv"><b>Сережа</b><span>★★★★★</span><p>Взял бы еще</p></div>
+          <div class="rv"><b>Катя</b><span>★☆☆☆☆</span><p>До удаленки не доехало</p></div>
         </div>
       </div>
     </div>
@@ -270,7 +270,7 @@ export async function finale(onAgain) {
       <i class="lamp l1"></i><i class="lamp l2"></i>
       <div class="tv"><div class="tv-screen">${remote.map(id => `<div class="tv-tile" data-person="${id}">${monFace(id)}<span>${PEOPLE[id].name}</span></div>`).join('')}<div class="tv-tile tv-logo"><span>ACTIONDIST</span></div></div></div>
       ${clock('mr-clock')}
-      <div class="party-bear">${bear({ cls: 'smile party' })}</div>
+      <div class="party-bear">${bear({ cls: 'party' })}</div>
       <div class="crowd row-back">${office.slice(0, 7).map(id => person(id)).join('')}</div>
       <div class="crowd row-front">${office.slice(7).map(id => person(id)).join('')}</div>
       <div class="mr-table">${TURNTABLE}</div>
@@ -289,25 +289,25 @@ export async function finale(onAgain) {
   A.sfx('tick');
   await sleep(900);
   try {
-    await say('all', 'С днём рождения, Юра!', { big: true });
+    await say('all', 'С днем рождения, Юра!', { big: true });
     FX.confetti(60);
     await say(['ira', 'vika_b'], 'Чек за торт мы, кстати, сдали вовремя.');
     await say('seryozha', 'И он по акции, бесплатно.');
     const nt = $('.tv-tile[data-person="nata"]', el);
     nt?.classList.add('glitching');
-    await say('nata', 'Юра, с днём рож… Алло?');
+    await say('nata', 'Юра, с днем рож… Алло?');
     nt?.classList.remove('glitching');
   } catch {}
   await sleep(500);
   const fin = h(`<div class="sheet-wrap final-wrap">
       <div class="paper final-paper">
         ${GROUP_PHOTO ? `<img class="group" src="${GROUP_PHOTO}" alt="Команда">` : ''}
-        <p>Всё правильно. В офисе тебя ждут пластинка с твоими любимыми песнями и нашими поздравлениями и торт.</p>
+        <p>Все правильно. В офисе тебя ждут пластинка с твоими любимыми песнями и нашими поздравлениями и торт.</p>
         <p>Что мы там наговорили, услышишь на месте. Приезжай, свечи сами себя не задуют.</p>
         <div class="stamp hit">СОГЛАСОВАНО<br>ВСЕМИ ОТДЕЛАМИ</div>
         <button class="fin-x" id="finX" aria-label="Убрать письмо">✕</button>
       </div>
-      <div class="final-btns"><button class="btn ghost" id="again">Пройти ещё раз</button><button class="btn" id="go">Еду!</button></div>
+      <div class="final-btns"><button class="btn ghost" id="again">Пройти еще раз</button><button class="btn" id="go">Еду!</button></div>
     </div>`);
   $('#overlay').append(fin);
   $('#go', fin).addEventListener('click', () => FX.confetti(90));
