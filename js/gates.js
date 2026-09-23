@@ -305,10 +305,19 @@ export async function finale(onAgain) {
         <p>Всё правильно. В офисе тебя ждут пластинка с твоими любимыми песнями и нашими поздравлениями и торт.</p>
         <p>Что мы там наговорили, услышишь на месте. Приезжай, свечи сами себя не задуют.</p>
         <div class="stamp hit">СОГЛАСОВАНО<br>ВСЕМИ ОТДЕЛАМИ</div>
+        <button class="fin-x" id="finX" aria-label="Убрать письмо">✕</button>
       </div>
       <div class="final-btns"><button class="btn ghost" id="again">Пройти ещё раз</button><button class="btn" id="go">Еду!</button></div>
     </div>`);
   $('#overlay').append(fin);
   $('#go', fin).addEventListener('click', () => FX.confetti(90));
   $('#again', fin).addEventListener('click', () => { A.sfx('click'); onAgain(); });
+  // письмо убирается, чтобы посмотреть офис, и возвращается кнопкой
+  const back = h('<button class="btn ghost fin-back">‹ Письмо</button>');
+  $('#finX', fin).addEventListener('click', () => {
+    A.sfx('click');
+    fin.classList.add('away');
+    $('#overlay').append(back);
+  });
+  back.addEventListener('click', () => { A.sfx('click'); fin.classList.remove('away'); back.remove(); });
 }

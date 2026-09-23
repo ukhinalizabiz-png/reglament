@@ -6,7 +6,7 @@ export const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': 
 // Костюм-бюст: покатые плечи, рукава по бокам, тень от подбородка на груди.
 // Голова-вырезка лежит слоем ниже, поэтому тень и воротник ложатся прямо на фото и связывают их.
 const SUIT = `
-<ellipse class="chin-shade" cx="50" cy="70.5" rx="15" ry="8.5" filter="url(#fSoft)"/>
+<ellipse class="chin-shade" cx="50" cy="67" rx="14" ry="7.5" filter="url(#fSoft)"/>
 <path class="suit" d="M17.5 200 L15.5 150 Q12 104 14.5 90 Q18 79 30 75.5 L42 71 Q50 80 58 71 L70 75.5 Q82 79 85.5 90 Q88 104 84.5 150 L82.5 200 Z"/>
 <path class="sleeve" d="M17.5 200 L15.5 150 Q12 104 14.5 90 Q18 79 30 75.5 L33.5 80.5 Q24 87 22.5 104 Q21.8 145 23 200 Z"/>
 <path class="sleeve" d="M82.5 200 L84.5 150 Q88 104 85.5 90 Q82 79 70 75.5 L66.5 80.5 Q76 87 77.5 104 Q78.2 145 77 200 Z"/>
@@ -59,7 +59,7 @@ function grinOverlay(mouth) {
 // У каждого свой наклон и рост, иначе ряд выглядит как копии одной фигуры.
 function pose(id) {
   const rnd = hash(id + '#pose');
-  return `--tilt:${(rnd() * 3.2 - 1.6).toFixed(2)}deg;--sc:${(0.955 + rnd() * 0.09).toFixed(3)};--ht:${(rnd() * 3.6 - 1.8).toFixed(2)}deg`;
+  return `--tilt:${(rnd() * 3.2 - 1.6).toFixed(2)}deg;--sc:${(0.955 + rnd() * 0.09).toFixed(3)};--ht:${(rnd() * 2.4 - 1.2).toFixed(2)}deg`;
 }
 
 export function person(id, { cls = '', name = true, snow = false } = {}) {
@@ -203,7 +203,7 @@ const MAN = (x, y, s = 1, run = false) => `<g transform="translate(${x} ${y}) sc
   <rect x="-4" y="-18" width="8" height="20" rx="2"/>
   ${run ? '<path class="rb-l" d="M-3 2 L-14 16 M3 2 L12 14 M-4 -12 L-16 -18 M4 -12 L16 -6"/>' : '<path class="rb-l" d="M-3 2 L-6 20 M3 2 L6 20 M-4 -12 L-12 -2 M4 -12 L12 -2"/>'}
 </g>`;
-const KEY = (x, y, w, label) => `<g transform="translate(${x} ${y})"><rect x="0" y="0" width="${w}" height="22" rx="3" class="rb-o"/><text x="${w / 2}" y="16" text-anchor="middle" class="rb-t">${label}</text></g>`;
+const KEY = (x, y, w, label) => `<g transform="translate(${x} ${y})"><rect x="0" y="0" width="${w}" height="22" rx="3" class="rb-o"/><text x="${w / 2}" y="15.5" text-anchor="middle" textLength="${w - 13}" lengthAdjust="spacingAndGlyphs" class="rb-t">${label}</text></g>`;
 
 export const REBUS_ART = {
   bike: `<svg class="rb" viewBox="0 0 120 80" aria-hidden="true">
@@ -212,8 +212,8 @@ export const REBUS_ART = {
     <g transform="translate(97 20)"><path d="M-9 14 Q-9 0 0 0 Q9 0 9 14 Z"/><rect x="-11" y="14" width="22" height="3.5" rx="1.5"/><circle cx="0" cy="21" r="3"/><rect x="-1.6" y="-5" width="3.2" height="5"/></g>
   </svg>`,
   simple: `<svg class="rb" viewBox="0 0 120 80" aria-hidden="true">
-    <text x="4" y="50" class="rb-big">2+2=4</text>
-    <path class="rb-check" d="M92 40 L100 50 L115 25"/>
+    <text x="4" y="52" class="rb-big" textLength="76" lengthAdjust="spacingAndGlyphs">2+2=4</text>
+    <path class="rb-check" d="M90 42 L98 52 L114 26"/>
   </svg>`,
   run: `<svg class="rb" viewBox="0 0 120 80" aria-hidden="true">
     ${MAN(76, 58, 1.15, true)}
@@ -226,7 +226,7 @@ export const REBUS_ART = {
     <g transform="translate(98 16)"><path d="M-10 16 Q-10 0 0 0 Q10 0 10 16 Z"/><rect x="-13" y="16" width="26" height="4" rx="2"/><path class="rb-l" d="M-16 -4 L-22 -10 M16 -4 L22 -10 M0 -8 L0 -16"/></g>
   </svg>`,
   copy: `<svg class="rb" viewBox="0 0 120 80" aria-hidden="true">
-    ${KEY(6, 6, 48, 'Ctrl+C')}${KEY(62, 6, 48, 'Ctrl+V')}
-    ${MAN(40, 74, 0.9)}${MAN(80, 74, 0.9)}
+    ${KEY(4, 4, 52, 'Ctrl+C')}${KEY(64, 4, 52, 'Ctrl+V')}
+    ${MAN(38, 62, 0.82)}${MAN(82, 62, 0.82)}
   </svg>`,
 };
