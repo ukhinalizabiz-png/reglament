@@ -301,7 +301,7 @@ input { font: inherit; }
 
 /* ---------- офис в разрезе ---------- */
 .hub { background: linear-gradient(rgba(4, 7, 5, .82), rgba(4, 7, 5, .92)), url(../assets/office/loft.webp) center / cover, var(--void); }
-.hub-view { position: relative; flex: 1; container-type: size; display: grid; place-items: center; margin-bottom: calc(var(--clue-h) + 66px); }
+.hub-view { position: relative; flex: 1; container-type: size; display: grid; place-items: center; margin-bottom: calc(var(--clue-h) + 66px); perspective: 1400px; perspective-origin: 50% 42%; }
 .hub { overflow: hidden; }
 .building {
   position: relative;
@@ -311,10 +311,25 @@ input { font: inherit; }
   will-change: transform;
 }
 .bldg-shell { position: absolute; inset: 3% 1% 5% 1%; background: linear-gradient(180deg, #0e1711, #0b130e); border-left: 2px solid var(--line-2); border-right: 2px solid var(--line-2); }
-.slab { position: absolute; left: 0; right: 0; background: linear-gradient(#2d4032, #19251c); border-top: 1px solid var(--line-2); }
+.slab { position: absolute; left: 0; right: 0; background: linear-gradient(#354c3b, #1b2820 62%, #101a13); border-top: 1px solid var(--line-2); box-shadow: 0 .9cqw 1.8cqw rgba(2, 5, 3, .55), inset 0 1px 0 rgba(207, 233, 209, .3); }
 .s-roof { top: 1.5%; height: 2.5%; left: -1.5%; right: -1.5%; }
 .s-mid { top: 38.2%; height: 3.6%; }
 .s-ground { top: 92.4%; height: 3%; left: -4%; right: -4%; }
+/* Объём дома: боковые стены и плиты перекрытий уходят назад.
+   Видны только во время облёта камеры, в покое дом снова плоский разрез. */
+.d3w, .d3p { position: absolute; display: none; pointer-events: none; }
+.building.d3 { transform-style: preserve-3d; }
+.building.d3 .d3w, .building.d3 .d3p { display: block; }
+.building.d3 .fig { filter: none; }
+.building.d3 .person, .building.d3 .lamp { animation: none !important; }
+.d3w { top: 3%; bottom: 5%; width: 11cqw; background: linear-gradient(90deg, #050a07, #16231a 65%, #20301f); }
+.d3w.l { left: 1%; transform-origin: 0 50%; transform: rotateY(90deg); }
+.d3w.r { right: 1%; transform-origin: 100% 50%; transform: rotateY(-90deg); }
+.d3p { left: 1%; right: 1%; height: 11cqw; background: linear-gradient(180deg, #3b5442, #1b2820); box-shadow: inset 0 1px 0 rgba(207, 233, 209, .25); transform-origin: 50% 0; transform: rotateX(-90deg); }
+.p-roof { top: 1.5%; left: -1.5%; right: -1.5%; }
+.p-mid { top: 38.2%; }
+.p-ground { top: 92.4%; left: -4%; right: -4%; }
+
 .floor-no { position: absolute; left: -.2%; font-family: var(--f-pixel); font-size: 3cqw; color: var(--dim); transform: translateX(-100%); display: none; }
 
 .zone {

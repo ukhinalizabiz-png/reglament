@@ -68,8 +68,7 @@ async function enter() {
   S.entered = true; save();
   renderHub();
   await sleep(80);
-  await zoomOut(1100);
-  $('#building').style.transition = '';
+  await reveal3d(1900);
   await G.regulation();
   setBusy(false);
   // Первое знакомство с офисом: объясняем, как тут всё устроено.
@@ -159,6 +158,8 @@ function hubHTML() {
     <div class="hub-view"><div class="building" id="building">
       <div class="bldg-shell"></div>
       <div class="slab s-roof"></div><div class="slab s-mid"></div><div class="slab s-ground"></div>
+      <i class="d3w l"></i><i class="d3w r"></i>
+      <i class="d3p p-roof"></i><i class="d3p p-mid"></i><i class="d3p p-ground"></i>
       ${Object.keys(DEPTS).map(zoneHTML).join('')}
       <div class="zone photo meetz" role="button" tabindex="0" data-zone="meeting" aria-label="Переговорная" style="${at(ZONES.meeting)};${zbg('meeting')}">
         <i class="lamp"></i><span class="plate">ПЕРЕГОВОРНАЯ</span><span class="mdoor"><b class="busy">ЗАНЯТО</b></span>
@@ -264,6 +265,30 @@ function placeYura(z, instant = false) {
   const wb = $('.wall-bear .bear');
   const dx = (z.x + z.w / 2) > 44 ? 2.5 : -2.5, dy = z.y < 40 ? -2.5 : 1.5;
   setTimeout(() => lookAt(wb, dx, dy), 250);
+}
+
+// Первый взгляд на офис: дом сначала виден объёмным макетом с двумя этажами,
+// камера медленно обходит его и только потом раскладывает в плоский разрез.
+async function reveal3d(ms = 1900, from = 'wide') {
+  const b = $('#building');
+  const [p0, p1] = from === 'floor2'
+    ? ['translateY(5%) scale(.84) rotateX(12deg) rotateY(23deg)', 'translateY(3%) scale(.89) rotateX(9deg) rotateY(14deg)']
+    : ['translateY(2%) scale(.72) rotateX(15deg) rotateY(-26deg)', 'translateY(1%) scale(.78) rotateX(11deg) rotateY(-16deg)'];
+  const dur = x => UI.FAST ? Math.round(x / 10) : x;
+  const orbit = Math.round(ms * 0.47), settle = ms - orbit;
+  b.classList.add('d3');
+  b.style.transition = 'none';
+  b.style.transformOrigin = '50% 50%';
+  b.style.transform = p0;
+  void b.offsetWidth;
+  b.style.transition = `transform ${dur(orbit)}ms linear`;
+  b.style.transform = p1;
+  await sleep(orbit);
+  b.style.transition = `transform ${dur(settle)}ms cubic-bezier(.4,0,.2,1)`;
+  b.style.transform = 'translate(0px, 0px) scale(1)';
+  await sleep(settle + 60);
+  b.classList.remove('d3');
+  b.style.transition = '';
 }
 
 function zoomTo(zid, ms = 420) {
@@ -450,9 +475,8 @@ async function go(id) {
         S.gift1 = true; save();
         renderHub();
         placeYura({ x: 55, y: 22, w: 10, h: 15 }, true);
-        zoomTo('captcha', 0);
         await sleep(60);
-        await zoomOut(900);
+        await reveal3d(1600, 'floor2');
         UI.toast('Ты на втором этаже. Тут сидит отдел коммерции', 3400);
       } else {
         await zoomOut();
