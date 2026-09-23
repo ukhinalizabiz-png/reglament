@@ -76,7 +76,7 @@ async function enter() {
   if (!S.seen.hub) {
     S.seen.hub = true; save();
     await sleep(500);
-    UI.toast('Кто зовёт, у того задание. Нажми на отдел или на кнопку внизу', 5200);
+    UI.toast('Кто зовёт, у того задание. Порядок любой: нажми отдел на плане или кнопку «Другой отдел»', 5600);
   }
 }
 
@@ -115,9 +115,11 @@ function renderGuide() {
   // кнопка внизу
   const cta = $('#cta');
   const big = t === 'finale' ? 'ФИНАЛ' : NICK[t].toUpperCase();
-  const small = t === 'stairs' ? 'Все 6 подсказок у тебя. Угадай подарок' : t === 'meeting' ? 'Все подсказки у тебя. Угадай второй подарок' : t === 'finale' ? 'Посмотреть поздравление ещё раз' : 'Тебя зовут. Или выбери любой другой отдел';
-  cta.innerHTML = `<span class="cta-txt"><small>${small}</small><b>${big}</b></span><span class="cta-go">›</span>`;
+  const small = t === 'stairs' ? 'Все 6 подсказок у тебя. Угадай подарок' : t === 'meeting' ? 'Все подсказки у тебя. Угадай второй подарок' : t === 'finale' ? 'Посмотреть поздравление ещё раз' : 'Тебя зовут';
+  $('#ctaGo', cta).innerHTML = `<span class="cta-txt"><small>${small}</small><b>${big}</b></span><span class="cta-go">›</span>`;
   cta.dataset.go = zid;
+  // кнопка выбора нужна, только если есть куда ещё пойти
+  cta.classList.toggle('with-pick', undoneHere().some(id => id !== t && DEPTS[id]));
 }
 
 // Остальные отделы тоже иногда подают голос: порядок свободный.
@@ -179,7 +181,10 @@ function hubHTML() {
       <i class="ring" id="ring"></i>
       <span class="bubble" id="bubble"></span>
     </div></div>
-    <button class="cta" id="cta"></button>
+    <div class="cta" id="cta">
+      <button class="cta-main" id="ctaGo"></button>
+      <button class="cta-pick" id="ctaPick">Другой<br>отдел</button>
+    </div>
   </section>`;
 }
 
@@ -188,7 +193,11 @@ function showHub() {
     $('#screens').prepend(h(hubHTML()));
     $('#building').addEventListener('click', onZone);
     $('#building').addEventListener('keydown', e => { if (e.key === 'Enter' && e.target.dataset.zone) onZone(e); });
-    $('#cta').addEventListener('click', () => { if (!busy) go($('#cta').dataset.go); });
+    $('#cta').addEventListener('click', e => {
+      if (busy) return;
+      if (e.target.closest('#ctaPick')) { pickDept(); return; }
+      go($('#cta').dataset.go);
+    });
     placeYura(S.gift1 ? { x: 55, y: 22, w: 10, h: 15 } : { x: 20, y: 74, w: 10, h: 18 }, true);
   }
   renderHub();
@@ -363,6 +372,33 @@ async function runGate(fn) {
     return false;
   }
   return r;
+}
+
+// Выбор отдела списком: по плану офиса нажимать можно, но это неочевидно.
+function pickDept() {
+  const t = target();
+  const list = [t, ...undoneHere().filter(id => id !== t)].filter(id => DEPTS[id]);
+  if (!list.length) return;
+  A.sfx('click');
+  let taken = false;
+  UI.sheet(`<div class="pick">
+      <b class="pick-h">Куда пойдёшь?</b>
+      <div class="pick-list">${list.map(id => `<button class="pick-item${id === t ? ' now' : ''}" data-pick="${id}">
+        <span class="pick-name">${NICK[id].toUpperCase()}${id === t ? '<i>зовут</i>' : ''}</span>
+        <span class="pick-call">${CALLS[id]}</span>
+      </button>`).join('')}</div>
+      <small class="pick-note">Отделы можно нажимать и прямо на плане офиса</small>
+    </div>`, { btn: 'Назад', cls: 'pick-sheet', onOpen: el => {
+    el.addEventListener('click', e => {
+      const b = e.target.closest('[data-pick]');
+      if (!b || taken) return;
+      taken = true;
+      A.sfx('click');
+      el.classList.add('out');
+      setTimeout(() => el.remove(), 240);
+      go(b.dataset.pick);
+    });
+  } });
 }
 
 // ---------- куда нажали ----------
