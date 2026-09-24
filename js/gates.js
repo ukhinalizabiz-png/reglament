@@ -271,8 +271,10 @@ export async function finale(onAgain) {
       <div class="tv"><div class="tv-screen">${remote.map(id => `<div class="tv-tile" data-person="${id}">${monFace(id)}<span>${PEOPLE[id].name}</span></div>`).join('')}<div class="tv-tile tv-logo"><span>ACTIONDIST</span></div></div></div>
       ${clock('mr-clock')}
       <div class="party-bear">${bear({ cls: 'party' })}</div>
-      <div class="crowd row-back">${office.slice(0, 7).map(id => person(id)).join('')}</div>
-      <div class="crowd row-front">${office.slice(7).map(id => person(id)).join('')}</div>
+      <div class="crowd-wrap">
+        <div class="crowd">${office.slice(0, 7).map(id => person(id)).join('')}</div>
+        <div class="crowd">${office.slice(7).map(id => person(id)).join('')}</div>
+      </div>
       <div class="mr-table">${TURNTABLE}</div>
     </div>
     <div class="mr-doors"><i></i><i></i></div>
