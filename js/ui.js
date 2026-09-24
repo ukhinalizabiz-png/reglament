@@ -72,7 +72,7 @@ function highlight(who, on, keepDim = false) {
   const top = $('#screens .screen:last-child');
   if (!who || !top) return;
   if (on) top.classList.add('speaking'); else if (!keepDim) top.classList.remove('speaking');
-  if (who === 'all') { top.classList.toggle('chorus', on); $('.person', top).forEach(el => el.classList.toggle('talking', on)); return; }
+  if (who === 'all') { top.classList.toggle('chorus', on); $$('.person', top).forEach(el => el.classList.toggle('talking', on)); return; }
   (Array.isArray(who) ? who : [who]).forEach(id => $$(`[data-person="${id}"]`, top).forEach(el => el.classList.toggle('talking', on)));
 }
 

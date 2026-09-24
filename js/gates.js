@@ -316,6 +316,7 @@ export async function finale(onAgain) {
   const back = h('<button class="btn ghost fin-back">‹ Письмо</button>');
   $('#finX', fin).addEventListener('click', () => {
     A.sfx('click');
+    UI.clearSubs();
     fin.classList.add('away');
     $('#overlay').append(back);
   });
