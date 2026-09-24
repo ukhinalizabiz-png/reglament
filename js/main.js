@@ -75,13 +75,13 @@ async function enter() {
   if (!S.seen.hub) {
     S.seen.hub = true; save();
     await sleep(500);
-    UI.toast('Кто зовет, у того задание. Порядок любой: нажми отдел на плане или кнопку «Другой отдел»', 5600);
+    UI.toast('Кто зовет, у того задание. Порядок любой: нажми отдел на плане или кнопку «Другой отдел»');
   }
 }
 
 function welcomeBack() {
   const t = target();
-  if (t && t !== 'finale') setTimeout(() => UI.toast(`С возвращением. Тебя ждут: ${nameOf(t)}`, 3600), 500);
+  if (t && t !== 'finale') setTimeout(() => UI.toast(`С возвращением. Тебя ждут: ${nameOf(t)}`), 500);
 }
 
 // ---------- кто сейчас зовет ----------
@@ -368,7 +368,7 @@ async function runDept(id) {
     await glitch();
   }
   if (n === NEED[d.floor]) {
-    UI.toast(d.floor === 1 ? 'Шесть подсказок у тебя. Иди к лестнице' : 'Четыре подсказки у тебя. Иди в переговорную', 3800);
+    UI.toast(d.floor === 1 ? 'Шесть подсказок у тебя. Иди к лестнице' : 'Четыре подсказки у тебя. Иди в переговорную');
     A.sfx('success');
   }
 }
@@ -477,7 +477,7 @@ async function go(id) {
         placeYura({ x: 55, y: 22, w: 10, h: 15 }, true);
         await sleep(60);
         await reveal3d(1600, 'floor2');
-        UI.toast('Ты на втором этаже. Тут сидит отдел коммерции', 3400);
+        UI.toast('Ты на втором этаже. Тут сидит отдел коммерции');
       } else {
         await zoomOut();
       }

@@ -110,7 +110,7 @@ export async function say(who, text, { block = true, big = false } = {}) {
     on.textContent = text; off.textContent = '';
     tap = false;
     if (alive()) {
-      const read = Math.round((block ? 800 : 700) + text.length * (block ? 32 : 28));
+      const read = Math.round((block ? 1400 : 1000) + text.length * (block ? 58 : 44));
       if (timer) timer.style.animationDuration = `${FAST ? read / 10 : read}ms`;
       subs.classList.add('done');
       await nap(read);
@@ -140,7 +140,8 @@ export async function crt(html, ms = 1400, { bad = false } = {}) {
 }
 
 let toastTimer;
-export function toast(text, ms = 2600) {
+export function toast(text, ms = 0) {
+  if (!ms) ms = Math.min(7000, Math.round(2400 + text.length * 58));
   const el = $('#toast');
   el.textContent = text;
   el.classList.add('show');
@@ -199,7 +200,7 @@ export function sheet(html, { btn = 'Закрыть', cls = '', onOpen } = {}) {
 
 export async function clueAward(text, from, floor) {
   const t = token;
-  await crt('ПОДСКАЗКА<br>ПОЛУЧЕНА', 800);
+  await crt('ПОДСКАЗКА<br>ПОЛУЧЕНА', 1100);
   const el = h(`<div class="sheet-wrap clue-wrap">
     <div class="paper clue-paper"><div class="clue-head">ПОДСКАЗКА · ${floor} ЭТАЖ · ${from}</div><div class="clue-text">${text}</div><div class="stamp">ВЫДАНО</div></div>
     <button class="btn">Забрать</button></div>`);

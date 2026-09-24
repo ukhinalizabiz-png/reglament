@@ -246,7 +246,7 @@ const WORDS = ['сделай', 'красиво', 'вчера', 'как у кон
 async function design(sc) {
   await say('sergey_d', 'Юра, у нас как раз окно между правками. Минут пять, не больше.');
   await say('anara', 'Подсказку мы нарисуем. Только сначала объясни задачу.');
-  await UI.crt('ПРИНИМАЕМ ТЗ', 1100);
+  await UI.crt('ПРИНИМАЕМ ТЗ', 1400);
   const body = panel(sc, `<div class="brief">
       <div class="brief-doc"><small>БРИФ ДЛЯ ДИЗАЙНЕРОВ</small><p id="bt">…</p></div>
       <div class="chips">${WORDS.map((w, i) => `<button class="chip" data-i="${i}">${w}</button>`).join('')}</div>
@@ -371,7 +371,7 @@ async function captcha(sc) {
   }
   clearTimeout(timer);
   closePanel(sc);
-  await UI.crt('ВЫ НЕ РОБОТ.<br>ВЫ ИМЕНИННИК', 1400);
+  await UI.crt('ВЫ НЕ РОБОТ.<br>ВЫ ИМЕНИННИК', 1900);
   return 'На нем будут свечи. Сколько, не скажем, это конфиденциальные данные.';
 }
 
